@@ -1,0 +1,354 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    .pgActive > a {
+        color: black !important;
+    }
+</style>
+<div style="background-color:white">
+    <h2>Product Manager</h2>
+
+    <div class="d-flex justify-content-end">
+        <div class="p-2">
+            <select name="select" id="ftCate" class="form-control">
+                <option value="0">---Filter by Category---</option>
+            </select>
+        </div>
+        <div class="p-2">
+            <button class="btn btn-info" id="add">
+                <i class="fa fa-plus-square-o"></i> ADD
+            </button>
+        </div>
+
+    </div>
+
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">STT</th>
+                    <th scope="col">ProductName</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody id="dataProduct"></tbody>
+        </table>
+    </div>
+    <div class="modal" id="addedit" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 1200px!important">
+            <div class="modal-content">
+                <div class="card" style="width:1197px;height:880px  ">
+                    <div class="card-header"><strong>Add Product</strong><div id="closeM" class="fa fa-times" style="float:right"></div></div>
+                    <div class="card-body card-block" style="overflow:scroll">
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="company" class=" form-control-label">Name</label></div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" id="name" placeholder="Enter your product name" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="select" class=" form-control-label">Category</label></div>
+                            <div class="col-12 col-md-9" ">
+                                <select name="select" id="selectCate" class="form-control">
+                                    <option value="0">--Select Category--</option>
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="file-input" class=" form-control-label">Image input</label></div>
+                            <div class="col-12 col-md-9">
+                                <div id="imgapp"></div>
+                                <input type="file" id="fileToUpload" class="form-control" />
+                                <br />
+                                <button id="upload" class="btn btn-primary">Upload</button>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="city" class=" form-control-label">Price</label></div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" id="price" placeholder="Enter your Price" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Description</label></div>
+                            <div class="col-12 col-md-9"><textarea id="CkContent"></textarea></div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label class=" form-control-label">Active</label></div>
+                            <input type="checkbox" id="active" class="form-control" style="width:50px; height:30px">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" id="closeM">Close</button>
+                            <button type="button" class="btn btn-primary" id="btnAccept">Save </button>
+                        </div>
+                        @*<---END data- TABLE--->*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="DeleteForm" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure?
+                    <input type="hidden" id="delId" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeDel">Close</button>
+                    <button type="button" class="btn btn-primary" id="btnDel">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="pagination" class="d-flex justify-content-end" style="padding-right:30px"></div>
+
+<script>
+    var _glbProduct;
+    var lsProduct = $('#dataProduct');
+    var ftCate = $('#ftCate');
+    var lsCate = $('#selectCate');
+    var pagi = $('#pagination'),
+        currentPage = 0,
+        recPerPage = 10,
+        currentFilterLs = [];
+    function loadProduct() {
+        $.ajax({
+            url: "/Admin/Product/Gets",
+            type: "Get",
+            success: function (res) {
+                res.forEach((e, i) => {
+                    e.Idx = i + 1;
+                })
+                _glbProduct = res;
+                if (_glbProduct) {
+                    pagi.html(ShowOnPagination(_glbProduct.length, recPerPage, currentPage));
+                    renderTable(0, currentPage);
+                }
+            }
+        })
+    }
+
+    CKEDITOR.replace('CkContent');
+
+    $("#upload").click(function () {
+
+        if (window.FormData == undefined) {
+            alert("Error: FormData is undefined");
+        }
+        else {
+            var fileUpload = $("#fileToUpload").get(0);
+            var files = fileUpload.files;
+
+            var fileData = new FormData();
+
+            fileData.append(files[0].name, files[0]);
+            $('#imgapp').html('');
+            $.ajax({
+                url: '/File/UploadFile',
+                type: 'post',
+                datatype: 'json',
+                contentType: false,
+                processData: false,
+                async: false,
+                data: fileData,
+                success: function (res) {
+                    $('#imgapp').append("<img class='imgUp' src='" + res + "'>");
+                }
+            });
+        }
+
+    });
+
+    function renderTable(cateId, currPage) {
+        lsProduct.html('');
+        var fltLs = cateId != 0 ? _glbProduct.filter(c => c.CategoryID == cateId).slice(10 * parseInt(currPage)) : _glbProduct.slice(10 * parseInt(currPage));
+        currentFilterLs = cateId != 0 ? _glbProduct.filter(c => c.CategoryID == cateId) : _glbProduct;
+        fltLs.forEach((e, i) => {
+            if (i >= 10) return;
+            lsProduct.append("<tr><th scope ='row'>" + e.Idx + "</th ><td>" + e.ProductName + "</td><td>" + e.CategoryName + "</td><td>Image</td><td>" + e.Price + "</td><td ><a data-id='" + e.ProductID + "' class='btnEdit'><i class='fa fa-wrench'></i></a> <a class='btnDel' data-id='" + e.ProductID + "'><i class='fa fa-times-circle' ></i></a></td></tr >");
+        })
+    }
+
+    //tất cả category
+    var _glbCate;
+    function ListCate() {
+        $.ajax({
+            url: "/Admin/Category/Gets",
+            type: "Get",
+            success: function (res) {
+                if (res) {
+                    _glbCate = res;
+                    console.log(res)
+                    res.forEach(e => {
+                        lsCate.append("<option value='" + e.CategoryID + "'>" + e.CategoryName + " </option>");
+                        ftCate.append("<option value='" + e.CategoryID + "'>" + e.CategoryName + " </option>");
+                    })
+                }
+            }
+        })
+    }
+
+    $(document).on('click', '.numbPage', function () {
+        if ($(this).hasClass('pgActive')) return;
+        currentPage = parseInt($(this).html()) - 1;
+        renderTable($('#ftCate').val(), currentPage);
+        pagi.html(ShowOnPagination(currentFilterLs.length, recPerPage, currentPage));
+        return false;
+    })
+        .on('click', '.page-ar', function () {
+            var action = $(this).attr('action');
+            if (action == 'prev') {
+                $('#lsPaging li.pgActive').prev().children('a').click();
+            } else {
+                $('#lsPaging li.pgActive').next().children('a').click();
+            }
+            return false;
+        })
+
+    $(document).on('change', "#ftCate", function () {
+        var cateId = $(this).val();
+        currentPage = 0;
+        renderTable(cateId, currentPage);
+        pagi.html(ShowOnPagination(currentFilterLs.length, recPerPage, currentPage));
+    })
+
+
+
+    //---Create & Update---
+    $(document).on('click', '#add', function () {
+        resetForm();
+
+        $("#addedit").show();
+    })
+
+    $(document).on('click', '#closeM', function () {
+        $("#addedit").hide();
+    })
+
+    $(document).on('click', '.btnEdit', function () {
+        resetForm();
+
+        var productId = $(this).attr('data-id');
+        var product = _glbProduct.find(e => e.ProductID == productId);
+        if (product) {
+            $('#name').val(product.ProductName);
+            $('#price').val(product.Price);
+            CKEDITOR.instances["CkContent"].setData(product.Description);
+            $('#active').val(product.Active);
+            obj.ProductID = productId
+        }
+        $('#addedit').show();
+    })
+
+
+    var obj = {}
+    $(document).on('click', '#btnAccept', function () {
+        obj.ProductName = $('#name').val();
+        obj.CategoryID = $('#selectCate').val();
+        if (obj.CategoryID == null) {
+            $('#addedit').hide();
+            alert('Vui lòng chọn category')
+        } else {
+            var lsImg = "";
+            for (var i = 0; i < $(".imgUp").length; i++) {
+                lsImg += $(".imgUp").eq(i).attr("src") + ",";
+            }
+            obj.ListImage = lsImg;
+            obj.Price = $('#price').val();
+            obj.Description = CKEDITOR.instances["CkContent"].getData();
+            obj.Active = $('#active').val();
+            CreateOrUpdate(obj);
+        }
+
+    })
+
+
+    function CreateOrUpdate(product) {
+        $.ajax({
+            url: "/Admin/Product/CreateOrUpdate",
+            type: "POST",
+            data: {
+                model: product
+            },
+            success: function (res) {
+                if (res) {
+                    loadProduct();
+                    alert('Cập nhật thành công');
+                } else {
+                    alert('Cập nhật thất bại');
+                }
+            }, error: function (error) {
+                console.log(error);
+            }
+        })
+        $("#addedit").hide()
+
+    }
+
+    //---delete---
+    $(document).on('click', '#btnDel', function () {
+        var id = $('#delId').val();
+        Delete(id);
+    })
+
+    $(document).on('click', '.btnDel', function () {
+        var productId = $(this).attr('data-id');
+
+        $('#delId').val(productId);
+        $('#DeleteForm').show();
+    })
+
+    $(document).on('click', '#closeDel', function () {
+        $("#DeleteForm").hide();
+    })
+
+    function Delete(id) {
+        $.ajax({
+            url: "/Admin/Product/Delete",
+            type: "POST",
+            data: {
+                id: id
+            },
+            success: function (res) {
+                if (res) {
+                    loadProduct();
+                    alert('xóa thành công');
+                } else {
+                    alert('xóa thất bại');
+                }
+            }, error: function (error) {
+                console.log(error);
+            }
+        })
+        $("#DeleteForm").hide();
+    }
+
+    function resetForm() {
+        $('#name').val('');
+        $('#price').val('');
+        $('#description').val('');
+        $('#active').val('');
+        $('#CkContent').val('');
+        $('#imgapp').val('');
+
+    }
+    loadProduct();
+    ListCate();
+</script>

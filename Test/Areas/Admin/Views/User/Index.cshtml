@@ -1,0 +1,261 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div style="background-color:white">
+    <h2>User Manager</h2>
+
+    <div class="d-flex justify-content-end">
+        <div class="p-2">
+            <button class="btn btn-info" id="add">
+                <i class="fa fa-plus-square-o"></i> ADD
+            </button>
+        </div>
+    </div>
+
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">STT</th>
+                    <th scope="col">UserName</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody id="dataUser"></tbody>
+        </table>
+    </div>
+    <div class="modal" id="addedit" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 1000px!important">
+            <div class="modal-content">
+                <div class="card" style="width:997px;height:710px ">
+                    <div class="card-header"><strong>Add User</strong><small> </small></div>
+                    <div class="card-body card-block">
+                        <div class="form-group">
+                            <label for="company" class=" form-control-label">Email</label>
+                            <input type="text" id="username" placeholder="Enter your email" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="company" class=" form-control-label">Password</label>
+                            <input type="text" id="password" placeholder="Enter your password" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="company" class=" form-control-label">Confirm Password</label>
+                            <input type="text" id="cfpassword" placeholder="Enter your Confirm Password" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="company" class=" form-control-label">Phone</label>
+                            <input type="text" id="phone" placeholder="Enter your Phone" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="company" class=" form-control-label">Address</label>
+                            <input type="text" id="address" placeholder="Enter your Address" class="form-control">
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label class=" form-control-label" id="gender">Gender</label></div>
+                            <div class="col col-md-9">
+                                <div class="form-check-inline form-check">
+                                    <label for="inline-radio1" class="form-check-label ">
+                                        <input type="radio" id="male" name="inline-radios" value="option1" class="form-check-input">Male
+                                    </label>
+                                    <label for="inline-radio2" class="form-check-label ">
+                                        <input type="radio" id="female" name="inline-radios" value="option2" class="form-check-input">Female
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label class=" form-control-label" id="role">Role</label></div>
+                            <div class="col col-md-9">
+                                <div class="form-check-inline form-check">
+                                    <label for="inline-radio1" class="form-check-label ">
+                                        <input type="checkbox" id="admin" name="inline-radios" value="option1" class="form-check-input">1
+                                    </label>
+                                    <label for="inline-radio2" class="form-check-label ">
+                                        <input type="checkbox" id="client" name="inline-radios" value="option2" class="form-check-input">2
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="row form-group">
+                                <div class="col col-md-3"><label for="select" class=" form-control-label">Category</label></div>
+                                <div class="col-12 col-md-9">
+                                    <select name="select" id="selectCate" class="form-control">
+                                        <option value="0">--Select Category--</option>
+                                    </select>
+                                    <div style="display:none" id="divSub">
+                                        <select id="subCate" class="form-control"></select>
+
+                                    </div>
+                                </div>
+                            </div>*@
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" id="closeM">Close</button>
+                            <button type="button" class="btn btn-primary" id="btnAccept">Save </button>
+                        </div>
+                        @*<---END data- TABLE--->*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="DeleteForm" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure?
+                    <input type="hidden" id="delId" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeDel">Close</button>
+                    <button type="button" class="btn btn-primary" id="btnDel">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+
+    .openModal {
+        display: block !important
+    }
+</style>
+<script>
+    var _glbUser;
+    var lsUser = $('#dataUser');
+    function LoadUser() {
+        $.ajax({
+            url: "/Admin/User/Gets",
+            type: "Get",
+            success: function (res) {
+                _glbUser = res;
+                if (_glbUser) {
+                    _glbUser.forEach((e, i) => {
+                        lsUser.append("<tr><th scope ='row'>" + (i + 1) + "</th ><td>" + e.Username + "</td><td>" + e.Password + "</td><td>" + e.Phone + "</td><td>" + e.Address + "</td><td>" + e.Gender + "</td><td>" + e.Role + "</td><td ><a data-id='" + e.AccountID + "' class='btnEdit' ><i class='fa fa-wrench'></i></a> <a class='btnDel' data-id='" + e.AccountID + "'><i class='fa fa-times-circle'></i></a></td></td></tr >");
+                    })
+                }
+            }
+        })
+    }
+    LoadUser();
+
+    //---Add and EDIT----
+    $(document).on('click', '#add', function () {
+        resetForm();
+        $('#addedit').addClass('openModal');
+    })
+
+    $(document).on('click', '#closeM', function () {
+        $('#addedit').removeClass('openModal');
+    })
+
+    var obj = {}
+    $(document).on('click', '#btnAccept', function () {
+        obj.Username = $('#username').val();
+        obj.Password = $('#password').val();
+        obj.Phone = $('#phone').val();
+        obj.Address = $('#address').val();
+        obj.Gender = $('#gender').val();
+        obj.Role = $('#role').val();
+        CreateOrUpdate(obj);
+    })
+
+    $(document).on('click', '.btnEdit', function () {
+        resetForm();
+        var userId = $(this).attr('data-id');
+        var user = _glbUser.find(e => e.AccountID == userId);
+        if (user) {
+            $('#username').val(user.Username);
+            $('#password').val(user.Password);
+            $('#phone').val(user.Phone);
+            $('#address').val(user.Address);
+            $('#gender').val(user.Gender);
+            $('#role').val(user.Role);
+            obj.AccountID = userId;
+        }
+        $("#addedit").addClass('openModal');
+    })
+
+    function CreateOrUpdate(user) {
+        $.ajax({
+            url: "/Admin/User/Register",
+            type: "Post",
+            data: {
+                model: user
+            },
+            success: function (res) {
+                if (res) {
+                    LoadUser();
+                    alert('okla');
+                } else {
+                    alert('ko okla');
+                }
+            }, error: function (error) {
+                console.log(error);
+            }
+        }),
+            $("#addedit").removeClass('openModal')
+    }
+
+
+
+    //---delete---
+    $(document).on('click', '.btnDel', function () {
+        var userId = $(this).attr('data-id');
+        $('#delId').val(userId);
+        $('#DeleteForm').addClass('openModal');
+    })
+
+    $(document).on('click', '#btnDel', function () {
+        var id = $('#delId').val();
+        Delete(id);
+    })
+
+    $(document).on('click', '#closeDel', function () {
+        $('#DeleteForm').removeClass('openModal');
+    })
+
+    function Delete(id) {
+        $.ajax({
+            url: "/Admin/User/Delete",
+            type: "Post",
+            data: {
+                id: id
+            },
+            success: function (res) {
+                if (res) {
+                    LoadUser();
+                    alert('okla');
+                } else {
+                    alert('ko okla');
+                }
+            }, error: function (error) {
+                console.log(error)
+            }
+        })
+        $("#DeleteForm").removeClass('openModal');
+    }
+
+
+    function resetForm() {
+        $('username').val('');
+        $('#password').val('');
+        $('#phone').val('');
+        $('#address').val('');
+        $('#gender').val('');
+        $('#role').val('');
+    }
+</script>

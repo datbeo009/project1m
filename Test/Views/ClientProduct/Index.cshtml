@@ -1,0 +1,159 @@
+﻿
+@*@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>*@
+
+<
+
+    <!-- slider Area Start-->
+    <div class="slider-area ">
+        <!-- Mobile Menu -->
+        <div class="single-slider slider-height2 d-flex align-items-center" data-background="~/assets/img/hero/category.jpg" style="background-color:antiquewhite">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="hero-cap text-center">
+                            <h2>product list</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- slider Area End-->
+    <!-- product list part start-->
+    <section class="product_list section_padding">
+        <div class="container">
+            <div class="row" style="width: 1400px!important;">
+                <div class="col-lg-3">
+                    <div class="product_sidebar" style="position:relative;right:150px;width:300px">
+                        <div class="single_sedebar">
+                            <form action="#">
+                                <input type="text" name="#" placeholder="Search keyword">
+                                <i class="ti-search"></i>
+                            </form>
+                        </div>
+                        <div class="single_sedebar">
+                            <div class="select_option">
+                                <div class="select_option_list">Category <i class="right fas fa-caret-down"></i> </div>
+                                <div class="select_option_dropdown" id="IdCat">
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single_sedebar">
+                          
+                              
+                                    <select name="select" id="selectCate" class="form-control">
+                                        <option value="0">--Select Category--</option>
+                                    </select>
+                                   
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                   
+                    <div class="product_list" style="position:relative; left:100px;">
+                        <div class="row" id="atContent">
+                        </div>
+
+                                <div class="load_more_btn text-center">
+                                    <a href="#" class="btn_3">Load More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+    <!-- product list part end-->
+    <!-- client review part here -->
+   
+    <section class="subscribe_part section_padding">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="subscribe_part_content">
+                        <h2>Get promotions & updates!</h2>
+                        <p>Seamlessly empower fully researched growth strategies and interoperable internal or “organic” sources credibly innovate granular internal .</p>
+                        <div class="subscribe_form">
+                            <input type="email" placeholder="Enter your mail">
+                            <a href="#" class="btn_1">Subscribe</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- subscribe part end -->
+    <script>
+        var _glbProduct;
+        var lsProduct = $('#atContent');
+        function LoadProduct() {
+            lsProduct.html('');
+            $.ajax({
+                url: "/ClientProduct/Gets",
+                type: "Get",
+                success: function (res) {
+                    res = JSON.parse(res);
+                    var _glbProduct = res;
+
+                    if (_glbProduct) {
+                        _glbProduct.forEach(e => {
+                            var ProductName = e.ProductName;
+                            var Price = e.Price;
+                            var image = e.ListImage ? e.ListImage.split(",")[0] : '/assetclient/assets/img/noimage.jpg';
+
+
+                            var oneContent = "<div class='col-lg-4 col-md-6 col-sm-6'><div class='single_product_item'><img src='" + image + "' alt='' class='img-fluid'> <h3><a href='/ClientProductDetail/Index/ " + e.ProductID + "'>" + ProductName + "</a></h3><p>" + Price + "</p></div> </div>"
+                            $("#atContent").append(oneContent);
+
+                        })
+                    }
+                }
+
+            })
+        }
+        LoadProduct();
+
+
+        // Load Category
+        
+        var IdCat = $('#IdCat');
+        function LoadCategory() {
+            IdCat.html('');
+            $.ajax({
+                url: "/ClientCategory/Gets",
+                type: "Get",
+                success: function (res) {
+                    res = JSON.parse(res);
+                    if (res) {
+                        res.forEach(e => {
+                            var categoryname = e.CategoryName;
+                            var cateId = e.CategoryID;
+
+                            IdCat.append("<p><a href='#" + cateId + "'>" + categoryname + "</a></p>");
+                            selectCate.append("<option value='" + e.cateId + "'>" + categoryname +"<option>")
+
+                           
+                        })
+                       
+                    }
+                }
+
+
+            })
+        }
+        LoadCategory();
+
+        //Filter Product
+        $(document).on('change', "#IdCat", function () {
+            var cateId = $(this).val();
+            var ftPro = _glbProduct.filter(e => e.CategoryID == cateId);
+            lsProduct(ftPro);
+        })
+    </script>
+

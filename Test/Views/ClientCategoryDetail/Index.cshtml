@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<script>
+    var id = @ViewBag.CatId;
+    function CategoryLoad() {
+        $.ajax({
+            url: "/ClientCategoryDetail/LoadCategory",
+            type: "Get",
+            data: { id: id },
+            success: function (res) {
+                res = JSON.parse(res)
+                if (res) {
+                    var
+                }
+            }
+        })
+    }
+</script>
+

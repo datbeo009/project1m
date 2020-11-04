@@ -1,0 +1,290 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<main>
+
+    <!-- slider Area Start -->
+    <div class="slider-area " style="background-color:#F5ECCE;height:900px">
+        <!-- Mobile Menu -->
+        <div class="slider-active">
+            <div class="single-slider slider-height" style="background-color:#F5ECCE">
+                <div class="container">
+                    <div class="row d-flex align-items-center justify-content-between">
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 d-none d-md-block">
+                            <div class="hero__img" data-animation="bounceIn" data-delay=".4s">
+                                <img src="~/assetclient/assets/img/hero/heroman.png" alt="">
+                            </div>
+                        </div>
+                        <div class="col-xl-5 col-lg-5 col-md-5 col-sm-8">
+                            <div class="hero__caption" style="margin-left:200px">
+                                <span data-animation="fadeInRight" data-delay=".4s">60% Discount</span>
+                                <h1 data-animation="fadeInRight" data-delay=".6s">Over <br> 200 Products</h1>
+                                <p data-animation="fadeInRight" data-delay=".8s">Best Product Collection By 2020!</p>
+                                <!-- Hero-btn -->
+                                <div class="hero__btn" data-animation="fadeInRight" data-delay="1s">
+                                    <a href="/ClientProduct/Index" class="btn hero-btn">Shop Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single-slider slider-height" data-background="assetclient/assets/img/hero/h1_hero.jpg">
+                <div class="container">
+                    <div class="row d-flex align-items-center justify-content-between">
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 d-none d-md-block">
+                            <div class="hero__img" data-animation="bounceIn" data-delay=".4s">
+                                <img src="~/assetclient/assets/img/hero/hero_man.png" alt="">
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- slider Area End-->
+    <!-- Category Area Start-->
+    <section class="category-area section-padding30">
+        <div class="container-fluid">
+            <!-- Section Tittle -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-tittle text-center mb-85">
+                        <h2> Category</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-4 col-lg-6">
+                    <div class="single-category mb-30">
+                        <div class="category-img">
+                            <img src="~/assetclient/assets/img/categori/cat1.png" alt="" style="width: 700px;">
+                            <div class="category-caption" style="position:relative; left:200px; top:100px">
+                                @*<h2>Whey Protein</h2>*@
+                                <span class="best"><a href="#" style="font-size: 40px;">Shopping</a></span>
+                                <span class="collection">New Collection</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-6">
+                    <div class="single-category mb-30">
+                        <div class="category-img text-center">
+                            <img src="~/assetclient/assets/img/categori/cat2.png" alt=""style="width: 700px;">
+                            <div class="category-caption" style="position:relative; left:10px; top:100px">
+                                <span class="collection">Discount!</span>
+                                @*<h2>Mass gainer</h2>*@
+                                <span class="best"><a href="#" style="font-size: 40px;">Shopping</a></span>
+                                <span class="collection">New Collection</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-6">
+                    <div class="single-category mb-30">
+                        <div class="category-img">
+                            <img src="~/assetclient/assets/img/categori/cat3.png" alt=""  style="width: 700px;">
+                            <div class="category-caption" style="position:relative; left:250px; top:100px">
+                                @*<h2>Vitamin & Minerals</h2>*@
+                                <span class="best"><a href="#" style="font-size: 40px;">Shopping</a></span>
+                                <span class="collection">New Collection</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Category Area End-->
+    <!-- Latest Products Start -->
+    <section class="latest-product-area padding-bottom">
+        <div class="container">
+            <div class="row product-btn d-flex justify-content-end align-items-end">
+                <!-- Section Tittle -->
+                <div class="col-xl-4 col-lg-5 col-md-5">
+                    <div class="section-tittle mb-30">
+                        <h2>Latest Products</h2>
+                    </div>
+                </div>
+                <div class="col-xl-8 col-lg-7 col-md-7">
+                    <div class="properties__button f-right">
+                        <!--Nav Button  -->
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">New</a>
+                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Offer</a>
+                            </div>
+                        </nav>
+                        <!--End Nav Button  -->
+                    </div>
+                </div>
+            </div>
+            <!-- Nav Card -->
+            <div class="tab-content" id="nav-tabContent">
+                <!-- card one -->
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <div class="row" id="lPro">
+                        
+                        </div>
+                    </div>
+                </div>
+                <!-- Card two -->
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <div class="row"id="lPro">
+                       
+                    </div>
+                </div>                             
+            </div>
+            <!-- End Nav Card -->
+        </div>
+    </section>
+    <!-- Latest Products End -->
+    <!-- Best Product Start -->
+    <div class="best-product-area lf-padding">
+        <div class="product-wrapper bg-height" style="background-color:#F5ECCE">
+            <div class="container position-relative">
+                <div class="row justify-content-between align-items-end">
+                    <div class="product-man position-absolute  d-none d-lg-block">
+                        <img src="~/assetclient/assets/img/categori/card-man.png" alt="">
+                    </div>
+                    <div class="col-xl-2 col-lg-2 col-md-2 d-none d-lg-block">
+                        <div class="vertical-text">
+                            <span>Muscules</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-8 col-lg-8">
+                        <div class="best-product-caption">
+                            <h2>Find The Best Product<br> from Our Shop</h2>
+                            <p>Designers who are interesten creating state ofthe.</p>
+                            <a href="/ClientProduct/Index" class="black-btn">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Shape -->
+        <div class="shape bounce-animate d-none d-md-block">
+            <img src="~/assetclient/assets/img/categori/card-shape.png" alt="" style="width: 100px">
+        </div>
+    </div>
+    <!-- Best Product End-->
+    <!-- Best Collection Start -->
+    <div class="best-collection-area section-padding2" style="padding-top:100px">
+        <div class="container">
+            <div class="row d-flex justify-content-between align-items-end">
+                <!-- Left content -->
+                <div class="col-xl-4 col-lg-4 col-md-6">
+                    <div class="best-left-cap">
+                        <h2>Best Collection of This Month</h2>
+                        <p>Designers who are interesten crea.</p>
+                        <a href="/ClientProduct/Index" class="btn shop1-btn">Shop Now</a>
+                    </div>
+                    <div class="best-left-img mb-30 d-none d-sm-block">
+                        <img src="~/assetclient/assets/img/collection/collection1.png" alt="" style="width: 400px">
+                    </div>
+                </div>
+                <!-- Mid Img -->
+                <div class="col-xl-2 col-lg-2 d-none d-lg-block">
+                    <div class="best-mid-img mb-30 ">
+                        <img src="~/assetclient/assets/img/collection/collection2.png" alt="" style="width: 300px">
+                    </div>
+                </div>
+                <!-- Riht Caption -->
+                <div class="col-xl-4 col-lg-6 col-md-6">
+                    <div class="best-right-cap ">
+                        <div class="best-single mb-30">
+                            <div class="single-cap">
+                                <h4>Whey On<br> Gold Standard</h4>
+                            </div>
+                            <div class="single-img">
+                                <img src="~/assetclient/assets/img/collection/collection3.png" alt="" style="width: 150px; height: 150px">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="best-right-cap">
+                        <div class="best-single mb-30">
+                            <div class="single-cap active">
+                                <h4>Fish Oil<br>Natural Made</h4>
+                            </div>
+                            <div class="single-img">
+                                <img src="~/assetclient/assets/img/collection/collection4.png" alt="" style="width: 150px">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="best-right-cap">
+                        <div class="best-single mb-30">
+                            <div class="single-cap">
+                                <h4>Serious Mass<br> On</h4>
+                            </div>
+                            <div class="single-img">
+                                <img src="~/assetclient/assets/img/collection/collection5.png" alt="" style="width: 150px">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="shop-method-area section-padding30" style="padding-top:10px">
+        <div class="container">
+            <div class="row d-flex justify-content-between">
+                <div class="col-xl-3 col-lg-3 col-md-6">
+                    <div class="single-method mb-40">
+                        <i class="ti-package"></i>
+                        <h6>Free Shipping Method</h6>
+                        <p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6">
+                    <div class="single-method mb-40">
+                        <i class="ti-unlock"></i>
+                        <h6>Secure Payment System</h6>
+                        <p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-6">
+                    <div class="single-method mb-40">
+                        <i class="ti-reload"></i>
+                        <h6>Secure Payment System</h6>
+                        <p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Shop Method End-->
+    <!-- Gallery Start-->
+  
+    <!-- Gallery End-->
+
+</main>
+<script>
+    function LoadProduct() {
+        $.ajax({
+            url: "/ClientProduct/Gets",
+            type: "Get",
+            success: function (res) {
+                res = JSON.parse(res);
+                if (res) {
+                    res.forEach(e => {
+                        var ProductName = e.ProductName;
+                        var Price = e.Price;
+                        var image = e.ListImage ? e.ListImage.split(",")[0] : '/assetclient/assets/img/noimage.jpg';
+
+                        $('#lPro').append("<div class='col-xl-4 col-lg-4 col-md-6' ><div class='single-product mb-60'><div class='product-img'> <img src='" + image + "' alt=''></div><h4><a href='/ClientProductDetail/Index/" + e.ProductID + "'>" + ProductName + "</a></div></h4> <div class='price'><ul> <li>" + Price +"</li></ul></div></div></div>") 
+
+
+                    })
+                }
+            }
+        })
+    }
+    LoadProduct();
+
+    //(document).on('change', '#submenu', function){
+    //    var cateId = this.val();
+    //    var ftpro = Where
+    //}
+</script>

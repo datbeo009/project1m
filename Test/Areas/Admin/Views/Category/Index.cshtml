@@ -1,0 +1,234 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    .pgActive > a {
+        color: black !important;
+    }
+</style>
+<div style="background-color:white">
+    <h2>Category Manager</h2>
+
+    <div class="d-flex justify-content-end">
+        <div class="p-2">
+            <button class="btn btn-info" id="add">
+                <i class="fa fa-plus-square-o"></i> ADD
+            </button>
+        </div>
+    </div>
+
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">STT</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody id="dataCategory"></tbody>
+        </table>
+    </div>
+    <div class="modal" id="addedit" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 800px!important">
+            <div class="modal-content">
+                <div class="card" style="width:797px;height:300px ">
+                    <div class="card-header"><strong>Add Category</strong><div id="closeM" class="fa fa-times" style="float:right"></div></div>
+                    <div class="card-body card-block">
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="company" class=" form-control-label">Name</label></div>
+                            <div class="col-12 col-md-9">
+                                <input type="text" id="name" placeholder="Enter your category name" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label class=" form-control-label">Active</label></div>
+                            <input type="checkbox" id="active" class="form-control" style="width:50px; height:30px">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" id="closeM">Close</button>
+                            <button type="button" class="btn btn-primary" id="btnAccept">Save </button>
+                        </div>
+                        @*<---END data- TABLE--->*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="DeleteForm" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure?
+                    <input type="hidden" id="delId" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeDel">Close</button>
+                    <button type="button" class="btn btn-primary" id="btnDel">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="pagination" class="d-flex justify-content-end" style="padding-right:30px"></div>
+
+<script>
+    var pagi = $('#pagination');
+    var _glbCategory;
+    var lsCategory = $('#dataCategory'),
+        //var selectCate = $('#selectCate'),
+        curPg = 0,
+        recPerPage = 10;
+    function loadCategory() {
+        //selectCate.html('');
+        $.ajax({
+            url: "/Admin/Category/Gets",
+            type: "Get",
+            success: function (res) {
+                res.forEach((e, i) => {
+                    e.Idx = i + 1;
+                })
+                _glbCategory = res;
+                if (_glbCategory) {
+                    renderTable(_glbCategory, curPg);
+                    pagi.html(ShowOnPagination(_glbCategory.length, recPerPage, curPg))
+                }
+            }
+        })
+    }
+
+
+
+    //---add and edit---
+    $(document).on('click', '.btnEdit', function () {
+        resetForm();
+        var categoryId = $(this).attr('data-id');
+        var category = _glbCategory.find(e => e.CategoryID == categoryId);
+        if (category) {
+            $('#name').val(category.CategoryName);
+            //$('#selectCate').val(category.ParentId);
+            $('#active').val(category.Active);
+            obj.CategoryID = categoryId
+        }
+        $('#addedit').show();
+    })
+    //
+    $(document).on('click', '#add', function () {
+        resetForm();
+        $('#addedit').show();
+    })
+
+    $(document).on('click', '#closeM', function () {
+        $('#addedit').hide();
+    })
+
+    $(document).on('click', '.numbPage', function () {
+        if ($(this).hasClass('pgActive')) return;
+        curPg = parseInt($(this).html()) - 1;
+        renderTable(_glbCategory, curPg);
+        pagi.html(ShowOnPagination(_glbCategory.length, recPerPage, curPg));
+        return false;
+    })
+        .on('click', '.page-ar', function () {
+            var action = $(this).attr('action');
+            if (action == 'prev') {
+                $('#lsPaging li.pgActive').prev().children('a').click();
+            } else {
+                $('#lsPaging li.pgActive').next().children('a').click();
+            }
+            return false;
+        })
+
+
+    var obj = {}
+    $(document).on('click', '#btnAccept', function () {
+        obj.CategoryName = $('#name').val();
+        obj.ParentId = 0;
+        obj.Active = $('#active').val();
+        Save(obj);
+    })
+    function Save(category) {
+        $.ajax({
+            url: "/Admin/Category/CreateOrUpdate",
+            type: "Post",
+            data: { model: category },
+            success: function (res) {
+                if (res) {
+                    alert("thanh cong")
+                    loadCategory();
+                } else {
+                    alert("that bai")
+                }
+            }, error: function (error) {
+                console.log(error);
+            }
+
+        })
+        $('#addedit').hide();
+    }
+
+    //--delete---
+    $(document).on('click ', '.btnDel', function () {
+        var categoryId = $(this).attr('data-id');
+        $('#delId').val(categoryId);
+        $('#DeleteForm').show();
+    })
+
+    $(document).on('click', '#btnDel', function () {
+        var id = $('#delId').val();
+        Delete(id);
+    })
+
+    $(document).on('click', '#closeDel', function () {
+        $('#DeleteForm').hide();
+    })
+
+    function Delete(id) {
+        $.ajax({
+            url: "/Admin/Category/Delete",
+            type: "POST",
+            data: {
+                id: id
+            },
+            success: function (res) {
+                if (res) {
+                    loadCategory();
+                    alert('xoa thanh cong');
+                } else {
+                    alert('xoa that bai');
+                }
+            }, error: function (error) {
+                console.log(error);
+            }
+        })
+        $("#DeleteForm").hide();
+    }
+
+
+
+    function resetForm() {
+        $('#name').val('');
+        //$('#selectCate').val('');
+        $('#active').val('');
+    }
+
+    function renderTable(data, currPage) {
+        lsCategory.html('');
+        var lsDataFinal = data.slice(recPerPage * parseInt(currPage));
+        lsDataFinal.forEach((e, i) => {
+            if (i >= 10) return;
+            lsCategory.append("<tr><th scope='row'>" + e.Idx + "</th><td>" + e.CategoryName + "</td><td><a data-id='" + e.CategoryID + "' class='btnEdit'><i class='fa fa-wrench'></i></a> <a class='btnDel' data-id='" + e.CategoryID + "'><i class='fa fa-times-circle' ></i></a></td></tr >");
+        })
+    }
+
+    loadCategory();
+</script>

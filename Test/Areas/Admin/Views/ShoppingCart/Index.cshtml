@@ -122,35 +122,35 @@
         $('#DeleteForm').show();
     })
 
-    $(document).on('click', '#btnDel', function () {
-        var id = $('#delId').val();
-        Delete(id);
-    })
+    //$(document).on('click', '#btnDel', function () {
+    //    var id = $('#delId').val();
+    //    Delete(id);
+    //})
 
-    $(document).on('click', '#closeDel', function () {
-        $('#DeleteForm').hide();
-    })
+    //$(document).on('click', '#closeDel', function () {
+    //    $('#DeleteForm').hide();
+    //})
 
-    function Delete(id) {
-        $.ajax({
-            url: "/Admin/Category/Delete",
-            type: "POST",
-            data: {
-                id: id
-            },
-            success: function (res) {
-                if (res) {
-                    loadCategory();
-                    alert('xoa thanh cong');
-                } else {
-                    alert('xoa that bai');
-                }
-            }, error: function (error) {
-                console.log(error);
-            }
-        })
-        $("#DeleteForm").hide();
-    }
+    //function Delete(id) {
+    //    $.ajax({
+    //        url: "/Admin/Category/Delete",
+    //        type: "POST",
+    //        data: {
+    //            id: id
+    //        },
+    //        success: function (res) {
+    //            if (res) {
+    //                loadCategory();
+    //                alert('xoa thanh cong');
+    //            } else {
+    //                alert('xoa that bai');
+    //            }
+    //        }, error: function (error) {
+    //            console.log(error);
+    //        }
+    //    })
+    //    $("#DeleteForm").hide();
+    //}
 
 
 

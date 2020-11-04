@@ -134,13 +134,12 @@
                                             <li><a href="/Home/Index" style="font-size: 25px;">Home</a></li>
                                             <li class="hot">
                                                 <a href="/ClientProduct/Index" style="font-size: 25px">Product</a>
-                                                <ul class="submenu" style="width:220px!important" id="submenu">
-                                                   
+                                                <ul class="submenu" style="width:220px!important" id="productSubmenu">
                                                 </ul>
                                             </li>
                                             <li>
                                                 <a href="#" style="font-size: 25px;">Health</a>
-                                                <ul class="submenu"  style="width:220px!important">
+                                                <ul class="submenu" style="width:220px!important">
                                                     <li><a href="/ClientHealth/Index" style="font-size: 20px"> Tdee Calculator</a></li>
                                                     <li><a href="single-product.html" style="font-size: 20px"> Macro Calculator</a></li>
                                                 </ul>
@@ -165,7 +164,7 @@
                                     </li>
                                     <li class=" d-none d-xl-block">
                                         <div class="favorit-items">
-                                            <i class="far fa-heart" style="font-size: x-large";></i>
+                                            <i class="far fa-heart" style="font-size: x-large" ;></i>
                                         </div>
                                     </li>
                                     <li>
@@ -204,7 +203,7 @@
                                 </div>
                                 <div class="footer-tittle">
                                     <div class="footer-pera">
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -260,10 +259,10 @@
 
     </footer>
 
-    @*<script>
-        var submenu = $('#submenu')
+    <script>
+        var submenu = $('#productSubmenu')
         function LoadCategory() {
-            submenu = html('');
+            submenu.html('');
             $.ajax({
                 url: "/ClientCategory/Gets",
                 type: "Get",
@@ -273,7 +272,7 @@
                         res.forEach(e => {
                             var CategoryName = e.CategoryName;
 
-                            $('#submenu').append("<li><a style='font-size:20px' href='#" + e.CategoryID +"'>" + CategoryName +"</a></li>")
+                            $('#productSubmenu').append("<li><a style='font-size:20px' href='#" + e.CategoryID + "'>" + CategoryName + "</a></li>")
                         })
                     }
                 }
@@ -282,8 +281,8 @@
         }
         LoadCategory();
 
-        
-    </script>*@
+
+    </script>
 
 </body>
 </html>

@@ -38,7 +38,7 @@
                                 <img src="~/assetclient/assets/img/hero/hero_man.png" alt="">
                             </div>
                         </div>
-                       
+
                     </div>
                 </div>
             </div>
@@ -72,7 +72,7 @@
                 <div class="col-xl-4 col-lg-6">
                     <div class="single-category mb-30">
                         <div class="category-img text-center">
-                            <img src="~/assetclient/assets/img/categori/cat2.png" alt=""style="width: 700px;">
+                            <img src="~/assetclient/assets/img/categori/cat2.png" alt="" style="width: 700px;">
                             <div class="category-caption" style="position:relative; left:10px; top:100px">
                                 <span class="collection">Discount!</span>
                                 @*<h2>Mass gainer</h2>*@
@@ -85,7 +85,7 @@
                 <div class="col-xl-4 col-lg-6">
                     <div class="single-category mb-30">
                         <div class="category-img">
-                            <img src="~/assetclient/assets/img/categori/cat3.png" alt=""  style="width: 700px;">
+                            <img src="~/assetclient/assets/img/categori/cat3.png" alt="" style="width: 700px;">
                             <div class="category-caption" style="position:relative; left:250px; top:100px">
                                 @*<h2>Vitamin & Minerals</h2>*@
                                 <span class="best"><a href="#" style="font-size: 40px;">Shopping</a></span>
@@ -126,18 +126,18 @@
                 <!-- card one -->
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                     <div class="row" id="lPro">
-                        
-                        </div>
+
                     </div>
                 </div>
-                <!-- Card two -->
-                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                    <div class="row"id="lPro">
-                       
-                    </div>
-                </div>                             
             </div>
-            <!-- End Nav Card -->
+            <!-- Card two -->
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <div class="row" id="lPro">
+
+                </div>
+            </div>
+        </div>
+        <!-- End Nav Card -->
         </div>
     </section>
     <!-- Latest Products End -->
@@ -256,7 +256,6 @@
     </div>
     <!-- Shop Method End-->
     <!-- Gallery Start-->
-  
     <!-- Gallery End-->
 
 </main>
@@ -273,7 +272,7 @@
                         var Price = e.Price;
                         var image = e.ListImage ? e.ListImage.split(",")[0] : '/assetclient/assets/img/noimage.jpg';
 
-                        $('#lPro').append("<div class='col-xl-4 col-lg-4 col-md-6' ><div class='single-product mb-60'><div class='product-img'> <img src='" + image + "' alt=''></div><h4><a href='/ClientProductDetail/Index/" + e.ProductID + "'>" + ProductName + "</a></div></h4> <div class='price'><ul> <li>" + Price +"</li></ul></div></div></div>") 
+                        $('#lPro').append("<div class='col-xl-4 col-lg-4 col-md-6' ><div class='single-product mb-60'><div class='product-img'> <img src='" + image + "' alt=''></div><h4><a href='/ClientProductDetail/Index/" + e.ProductID + "'>" + ProductName + "</a></div></h4> <div class='price'><ul> <li>" + Price +"</li></ul></div></div></div>")
 
 
                     })

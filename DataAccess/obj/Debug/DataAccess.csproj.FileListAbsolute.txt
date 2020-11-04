@@ -1,0 +1,12 @@
+F:\toivaban-master\DataAccess\bin\Debug\DataAccess.exe.config
+F:\toivaban-master\DataAccess\bin\Debug\DataAccess.exe
+F:\toivaban-master\DataAccess\bin\Debug\DataAccess.pdb
+F:\toivaban-master\DataAccess\bin\Debug\EntityFramework.dll
+F:\toivaban-master\DataAccess\bin\Debug\EntityFramework.SqlServer.dll
+F:\toivaban-master\DataAccess\bin\Debug\EntityFramework.xml
+F:\toivaban-master\DataAccess\bin\Debug\EntityFramework.SqlServer.xml
+F:\toivaban-master\DataAccess\obj\Debug\DataAccess.csproj.CoreCompileInputs.cache
+F:\toivaban-master\DataAccess\obj\Debug\DataAccess.csproj.CopyComplete
+F:\toivaban-master\DataAccess\obj\Debug\DataAccess.exe
+F:\toivaban-master\DataAccess\obj\Debug\DataAccess.pdb
+F:\toivaban-master\DataAccess\obj\Debug\DataAccess.csprojAssemblyReference.cache

@@ -18,7 +18,7 @@ namespace DataAccess.Entity
         public int UserId { get; set; }
         public string Fee { get; set; }
         public string ShipMethod { get; set; }
-        public int OrderDetailId { get; set; }
         public int Status { get; set; }
+        public int TotalPrice { get; set; }
     }
 }

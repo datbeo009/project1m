@@ -57,6 +57,7 @@
     <Compile Include="DAL\Cart.cs" />
     <Compile Include="DAL\CategoryBll.cs" />
     <Compile Include="DAL\Encryptor.cs" />
+    <Compile Include="DAL\Order.cs" />
     <Compile Include="DAL\ProductBll.cs" />
     <Compile Include="DAL\UserBll.cs" />
     <Compile Include="Entity\Account.cs" />

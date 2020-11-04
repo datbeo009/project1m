@@ -1,5 +1,6 @@
 ﻿using DataAccess.DAL;
 using DataAccess.Entity;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,18 +18,18 @@ namespace Test.Areas.Admin.Controllers
         }
 
         DataAccess.DAL.Order bll = new DataAccess.DAL.Order();
-        public  List<DataAccess.Entity.Order> Gets()
+        public string Gets()
         {
-            return bll.GetAll();
+            return JsonConvert.SerializeObject(bll.GetAll());
         }
 
         public bool ApprovedOrder(int id, bool isDenied)
         {
             return bll.ApproveOrder(id, isDenied);
         }
-        public List<OrderDetail> GetDetail(int id)
+        public string GetDetail(int id)
         {
-            return bll.GetDetail(id);
+            return JsonConvert.SerializeObject(bll.GetDetail(id));
         }
 
     }

@@ -28,22 +28,29 @@
         </table>
     </div>
 
-    <div class="modal" id="DeleteForm" role="dialog" aria-hidden="true">
+    <div class="modal" id="mdDetail" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Delete</h5>
+                    <h5 class="modal-title">Order Detail</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    Are you sure?
-                    <input type="hidden" id="delId" />
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">STT</th>
+                                <th scope="col">Product Name</th>
+                                <th scope="col">Price</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataDetail"></tbody>
+                    </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeDel">Close</button>
-                    <button type="button" class="btn btn-primary" id="btnDel">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeDetail">Close</button>
                 </div>
             </div>
         </div>
@@ -74,20 +81,8 @@
         })
     }
 
+    
 
-
-    //---add and edit---
-    $(document).on('click', '.btnEdit', function () {
-        resetForm();
-        var categoryId = $(this).attr('data-id');
-        var category = _glbCategory.find(e => e.CategoryID == categoryId);
-        if (category) {
-            $('#name').val(category.CategoryName);
-            $('#active').val(category.Active);
-            obj.CategoryID = categoryId
-        }
-        $('#addedit').show();
-    })
     //
     $(document).on('click', '#add', function () {
         resetForm();
@@ -101,8 +96,8 @@
     $(document).on('click', '.numbPage', function () {
         if ($(this).hasClass('pgActive')) return;
         curPg = parseInt($(this).html()) - 1;
-        renderTable(_glbCategory, curPg);
-        pagi.html(ShowOnPagination(_glbCategory.length, recPerPage, curPg));
+        renderTable(_glbOrder, curPg);
+        pagi.html(ShowOnPagination(_glbOrder.length, recPerPage, curPg));
         return false;
     })
         .on('click', '.page-ar', function () {
@@ -114,27 +109,28 @@
             }
             return false;
         })
+        .on('click', '.btnApproved', function () {
+            var oId = $(this).attr('data-id');
 
-    //--delete---
-    $(document).on('click ', '.btnDel', function () {
-        var categoryId = $(this).attr('data-id');
-        $('#delId').val(categoryId);
-        $('#DeleteForm').show();
-    })
-
+        })
     function resetForm() {
-        //$('#name').val('');
-        //$('#active').val('');
+        
     }
+
+    $('#closeDetail').on('click', function () {
+        $('#mdDetail').hide();
+    })
 
     function renderTable(data, currPage) {
         lsOrder.html('');
         var lsDataFinal = data.slice(recPerPage * parseInt(currPage));
         lsDataFinal.forEach((e, i) => {
             if (i >= recPerPage) return;
-            lsOrder.append("<tr><th scope='row'>" + e.Idx + "</th><td>" + e.Name + "</td><td>" + e.Address + "</td><td>" + e.Note + "</td><td>" + e.Status + "</td><td ><a data-id='" + e.OrderId + "' class='btnEdit'><i class='fa fa-wrench'></i></a> <a class='btnDel' data-id='" + e.OrderId + "'><i class='fa fa-times-circle' ></i></a></td></tr >");
+            lsOrder.append("<tr><th scope='row'>" + e.Idx + "</th><td>" + e.Name + "</td><td>" + e.Address + "</td><td>" + e.Note + "</td><td>" + e.Status + "</td><td > <a data-id='" + e.OrderId + "' class='btnView'><i class='fas fa-eye'></i></a>" + (e.Status == 'Pending' ? " <a data-id='" + e.OrderId + "' class='btnApproved'><i class='fa fa-wrench'></i></a>" : "") + (e.Status == 'Pending' ? " <a class='btnCancel' data-id='" + e.OrderId + "'><i class='fa fa-times-circle' ></i></a></td></tr>" : (e.Status == 'Approve' ? " <a class='btnCancel' data-id='" + e.OrderId + "'><i class='fa fa-times-circle' ></i></a></td></tr>":"")) );
         })
     }
+
+
 
     loadOrder();
 </script>

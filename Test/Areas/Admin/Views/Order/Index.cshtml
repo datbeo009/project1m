@@ -69,10 +69,11 @@
             url: "/Admin/Order/Gets",
             type: "Get",
             success: function (res) {
-                res.forEach((e, i) => {
+                _glbOrder = JSON.parse(res);
+                _glbOrder.forEach((e, i) => {
                     e.Idx = i + 1;
                 })
-                _glbOrder = res;
+                
                 if (_glbOrder) {
                     renderTable(_glbOrder, curPg);
                     pagi.html(ShowOnPagination(_glbOrder.length, recPerPage, curPg))
@@ -111,11 +112,35 @@
         })
         .on('click', '.btnApproved', function () {
             var oId = $(this).attr('data-id');
-
-
-
-
-
+            $.ajax({
+                url: '/Admin/Order/ApprovedOrder',
+                type: 'get',
+                data: JSON.stringify({ id: oId, isDenied: false }),
+                success: function (res) {
+                    if (res) {
+                        alert('Success');
+                        loadOrder();
+                    } else {
+                        alert('Failed');
+                    }
+                }
+            })
+        })
+        .on('click', '.btnCancel', function () {
+            var oId = $(this).attr('data-id');
+            $.ajax({
+                url: '/Admin/Order/ApprovedOrder',
+                type: 'get',
+                data: JSON.stringify({ id: oId, isDenied: true }),
+                success: function (res) {
+                    if (res) {
+                        alert('Success');
+                        loadOrder();
+                    } else {
+                        alert('Failed');
+                    }
+                }
+            })
         })
     function resetForm() {
         

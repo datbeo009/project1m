@@ -118,7 +118,7 @@
                                         <ul id="navigation">
                                             <li><a href="/Home/Index" style="font-size: 25px;">Home</a></li>
                                             <li class="hot">
-                                                <a href="/ClientProduct/Index" style="font-size: 25px">Product</a>
+                                                <a href="/ClientProduct/Index?cate=0" style="font-size: 25px">Product</a>
                                                 <ul class="submenu" style="width:220px!important" id="productSubmenu">
                                                 </ul>
                                             </li>
@@ -256,8 +256,7 @@
                     if (res) {
                         res.forEach(e => {
                             var CategoryName = e.CategoryName;
-
-                            $('#productSubmenu').append("<li><a style='font-size:20px' href='#" + e.CategoryID + "'>" + CategoryName + "</a></li>")
+                            $('#productSubmenu').append("<li><a style='font-size:20px' href='/ClientProduct/Index?cate=" + e.CategoryID + "'>" + CategoryName + "</a></li>")
                         })
                     }
                 }

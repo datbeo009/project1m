@@ -74,6 +74,7 @@ namespace Test.Controllers
             return allCart == null ? 0 : allCart.Count;
         }
         DataAccess.DAL.Order bll = new DataAccess.DAL.Order();
+
         // 1 thành công
         //2 thất bại
         //3 chưa đăng nhập
@@ -104,8 +105,16 @@ namespace Test.Controllers
                     enti.Amount = item.Amount;
                     lsDetail.Add(enti);
                 }
-
-                return bll.CreateOrder(lsDetail, order) ? 1 : 2;
+           
+                if (bll.CreateOrder(lsDetail, order))
+                {
+                    Session["ClientLogin"] = null;
+                    return 1;
+                }
+                else
+                {
+                    return 2;
+                }
             }
             return 3;
         }

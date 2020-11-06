@@ -28,16 +28,17 @@ namespace Test.Areas.Admin.Controllers
             if (ull.Login(model.UserName, model.PassWord))
             {
                 var user = ull.User(model.UserName);
-                var adminLogin = new AdminLogin();
-                adminLogin.UserName = user.Username;
-                adminLogin.UserId = user.AccountID;
+                if (user.Role == 1)
+                {
+                    var adminLogin = new AdminLogin();
+                    adminLogin.UserName = user.Username;
+                    adminLogin.UserId = user.AccountID;
 
-                Session["AdminSession"] = adminLogin;
-                return Json(Url.Action("Index", "Product"));
-                //return RedirectToAction("Index", "Product", new { area = "Admin" });
+                    Session["AdminSession"] = adminLogin;
+                    return Json(Url.Action("Index", "Product"));
+                }
             }
             return Json(Url.Action("Index"));
-            //return View("Index");
         }
 
 

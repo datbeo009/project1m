@@ -39,12 +39,12 @@
                                 <input class="product_count_item input-number" id="numToOrd" type="text" value="1" min="0" max="10">
                                 <span class="product_count_item number-increment" id="numPlus"> <i class="ti-plus"></i></span>
                             </div>
-                            <p>x</p>
+                            <p>x&nbsp;</p>
                             <p id="pRice"></p>
-                            <p>VND</p>
+                            <p>&nbsp;VND</p>
                         </div>
                         <div class="add_to_cart">
-                            <a href="#" class="btn_3">add to cart</a>
+                            <a href="#" class="btn_3" id="btnAdd">add to cart</a>
                         </div>
                     </div>
                 </div>
@@ -113,7 +113,24 @@
         $('#numToOrd').val(val + 1);
     })
 
-    
+    $('#btnAdd').on('click', function () {
+        var prodNum = parseInt($('#numToOrd').val());
+        if (prodNum == 0) return false;
+        $.ajax({
+            url: '/ShoppingCart/AddToCart',
+            type: 'post',
+            data: { productId: parseInt(id), amount: prodNum },
+            success: function (res) {
+                if (res) {
+                    alert('Success');
+                    loadCartCount();
+                } else {
+                    alert('Failed');
+                }
+            }
+        })
+        return false;
+    })
 
     ProductLoad();
 </script>

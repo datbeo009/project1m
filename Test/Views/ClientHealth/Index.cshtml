@@ -5,189 +5,99 @@
 
 <div id="contentout">
     <div id="content" style="float:inherit">
-       		<h1 style="background-color:antiquewhite; position:center">TDEE Calculator</h1>
-       
-        <span id="ucframe"></span>
-        <div id="topmenu"><ul><li><a href="#" onclick="popMenu('standard',1);">US Units</a></li> <li id="menuon"><a href="#" onclick="popMenu('metric',1);">Metric Units</a></li> <li><a href="#" onclick="popMenu('other');">Other Units</a></li></ul></div>
-
-        <div class="panel2" style="padding:10px;">
-            <table id="calinputtable" width="420">
-                <form action="tdee-calculator.html" name="calform"></form>
-                <input type="hidden" name="ctype" id="ctype" value="metric">
-                <tbody>
-                    <tr>
-                        <td width="50">Age</td>
-                        <td width="370"><input type="text" name="cage" id="cage" value="25" class="inhalf" onkeyup="iptfieldCheck(this, 'r', 'pn');"> ages 18 - 80</td>
-                    </tr>
-                    <tr>
-                        <td>Gender</td>
-                        <td><label for="csex1" class="cbcontainer"><input type="radio" name="csex" id="csex1" value="m" checked=""><span class="rbmark"></span> male</label> &nbsp; <label for="csex2" class="cbcontainer"><input type="radio" name="csex" id="csex2" value="f"><span class="rbmark"></span> female</label></td>
-                    </tr>
-                </tbody>
-            </table>
-            <table width="420" id="standardheightweight" style="display: none;">
-                <tbody>
-                    <tr>
-                        <td width="50">Height</td>
-                        <td width="370">
-                            <table border="0" cellpadding="0" cellspacing="0">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <input type="text" name="cheightfeet" id="cheightfeet" value="5" class="inhalf inuifoot" onkeyup="iptfieldCheck(this, '', 'pzn');"><span class="inuifootspan">feet</span>
-                                        </td>
-                                        <td>&nbsp;</td>
-                                        <td>
-                                            <input type="text" name="cheightinch" id="cheightinch" value="10" class="inhalf inuiinch" onkeyup="iptfieldCheck(this, '', 'pzn');"><span class="inuiinchspan">inches</span>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Weight</td>
-                        <td><input type="text" name="cpound" id="cpound" value="165" class="infull inuipound" onkeyup="iptfieldCheck(this, 'r', 'pn');"><span class="inuipoundspan">pounds</span></td>
-                    </tr>
-                </tbody>
-            </table>
-            <table width="420" id="metricheightweight" style="display: block;">
-                <tbody>
-                    <tr>
-                        <td width="50">Height</td>
-                        <td width="370"><input type="text" name="cheightmeter" id="cheightmeter" value="180" class="infull inuick" onkeyup="iptfieldCheck(this, 'r', 'pn');"><span class="inuickspan">cm</span></td>
-                    </tr>
-                    <tr id="metricweight">
-                        <td>Weight</td>
-                        <td><input type="text" name="ckg" id="ckg" value="65" class="infull inuick" onkeyup="iptfieldCheck(this, 'r', 'pn');"><span class="inuickspan">kg</span></td>
-                    </tr>
-                </tbody>
-            </table>
-            <table width="500">
-                <tbody>
-                    <tr>
-                        <td width="50">Activity</td>
-                        <td width="450">
-                            <select id="cactivity" name="cactivity">
-                                <option value="1">Basal Metabolic Rate (BMR)</option>
-                                <option value="1.2">Sedentary: little or no exercise</option>
-                                <option value="1.375">Light: exercise 1-3 times/week</option>
-                                <option value="1.465" selected="">Moderate: exercise 4-5 times/week</option>
-                                <option value="1.55">Active: daily exercise or intense exercise 3-4 times/week</option>
-                                <option value="1.725">Very Active: intense exercise 6-7 times/week</option>
-                                <option value="1.9">Extra Active: very intense exercise daily, or physical job</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="50">&nbsp;</td>
-                        <td width="450">
-                            <div id="ccsettingtitle" style="margin: 10px 0px;"><b><a href="#" onclick="return cshmoreoption(1);">+ Settings</a></b></div>
-                            <div id="ccsettingcontent" style="display: none;">
-                                <input type="hidden" name="cmop" id="cmoreoption" value="0">
-                                <div><b>Results unit:</b></div>
-                                <div>
-                                    <label for="coutunit1" class="cbcontainer"><input type="radio" name="coutunit" id="coutunit1" value="c" checked=""><span class="rbmark"></span> Calories</label> &nbsp;
-                                    <label for="coutunit2" class="cbcontainer"><input type="radio" name="coutunit" id="coutunit2" value="j"><span class="rbmark"></span> Kilojoules</label>
-                                </div>
-
-                                <div style="padding-top:15px;"><b>BMR estimation formula:</b> <img class="ttimg" src="/img/svg/help.svg" onmouseover="tooltip.show('The Katch-McArdle Formula can be more accurate if you are lean and know your body fat percentage.', '');" onmouseout="tooltip.hide();"></div>
-                                <div>
-                                    <div><label for="cformula1" class="cbcontainer"><input type="radio" name="cformula" id="cformula1" value="m" checked=""><span class="rbmark"></span> Mifflin St Jeor</label></div>
-                                    <div><label for="cformula2" class="cbcontainer"><input type="radio" name="cformula" id="cformula2" value="k"><span class="rbmark"></span> Katch-McArdle</label> &nbsp; <a href="/body-fat-calculator.html">Body Fat:</a> <input type="text" name="cfatpct" value="20" class="in4char inpct" onkeyup="iptfieldCheck(this, '', 'pn');"></div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="50">&nbsp;</td>
-                        <td width="450"><input name="printit" value="0" type="hidden"><input type="image" src="//d26tpo4cm8sb6k.cloudfront.net/img/svg/calculate.svg" value="Calculate" alt="Calculate"> <img src="//d26tpo4cm8sb6k.cloudfront.net/img/svg/clear.svg" onclick="clearForm(document.calform);" class="clearbtn"></td>
-                    </tr>
-
-                </tbody>
-            </table>
+        <div style="background-color:antiquewhite;text-align: center; height:250px">
+            <h1 style="padding-top:100px">TDEE Calculator</h1>
         </div>
-        <ul style="margin-top:0px;margin-left:20px;">
-            <li class="smalltext"><b>Exercise:</b> 15-30 minutes of elevated heart rate activity.</li>
-            <li class="smalltext"><b>Intense exercise:</b> 45-120 minutes of elevated heart rate activity.</li>
-            <li class="smalltext"><b>Very intense exercise:</b> 2+ hours of elevated heart rate activity.</li>
-        </ul>
-        <script>
-function cshweightgaininfo(optVar){
-	if (optVar==1){
-		gObj("weightgaininfo").style.display = 'block';
-		gObj("weightgaininfolink").innerHTML = "<a href='#' onClick='return cshweightgaininfo(0);'>Hide info for weight gain</a>";
-	}else{
-		gObj("weightgaininfo").style.display = 'none';
-		gObj("weightgaininfolink").innerHTML = "<a href='#' onClick='return cshweightgaininfo(1);'>Show info for weight gain</a>";
-	}
-	return false;
-}
-function cshmoreoption(optVar){
-	if (optVar==1){
-		gObj("ccsettingcontent").style.display = 'block';
-		gObj("cmoreoption").value = "1";
-		gObj("ccsettingtitle").innerHTML = "<b><a href=\"#\" onclick=\"return cshmoreoption(0);\">- Settings</a></b>";
-	}else{
-		gObj("ccsettingcontent").style.display = 'none';
-		gObj("cmoreoption").value = "0";
-		gObj("ccsettingtitle").innerHTML = "<b><a href=\"#\" onclick=\"return cshmoreoption(1);\">+ Settings</a></b>";
-	}
-	return false;
-}
-cshmoreoption(0);
-function popMenu(inval, insubmit){
-	htmlVal = "";
-	if (inval == "metric"){
-		htmlVal = htmlVal + "<li><a href=\"#\" onclick=\"popMenu('standard',1);\">US Units</a></li> <li id='menuon'><a href=\"#\" onclick=\"popMenu('metric',1);\">Metric Units</a></li> <li><a href=\"#\" onclick=\"popMenu('other');\">Other Units</a></li>";
-		gObj("ctype").value="metric";
-		gObj("standardheightweight").style.display = 'none';
-		gObj("metricheightweight").style.display = 'block';
-		htmlVal = "<ul>" + htmlVal + "</ul>";
-		gObj("ucframe").innerHTML ="";
-		if (insubmit==1) document.calform.submit();
-	}else if (inval == "standard"){
-		htmlVal = htmlVal + "<li id='menuon'><a href=\"#\" onclick=\"popMenu('standard',1);\">US Units</a></li> <li><a href=\"#\" onclick=\"popMenu('metric',1);\">Metric Units</a></li> <li><a href=\"#\" onclick=\"popMenu('other');\">Other Units</a></li>";
-		gObj("ctype").value="standard";
-		gObj("standardheightweight").style.display = 'block';
-		gObj("metricheightweight").style.display = 'none';
-		htmlVal = "<ul>" + htmlVal + "</ul>";
-		gObj("ucframe").innerHTML ="";
-		if (insubmit==1) document.calform.submit();
-	}else{
-		htmlVal = gObj("topmenu").innerHTML ;
-		gObj("ucframe").innerHTML = "<iframe src=\"/converter/converter.php?type=\" style=\"overflow:hidden;width:100%\" width=\"100%\" height=\"238\" frameborder=\"NO\" scrolling=\"NO\" allowTransparency=\"true\" ></IFRAME>";
-	}
-	gObj("topmenu").innerHTML = htmlVal;
-}
-popMenu("metric",0);
-        </script>
+        <div style="padding:250px;padding-top:20px">
+            <form>
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" class="form-control" id="age">
+                </div>
+                <div class="form-group">
+                    <label for="height">Height(cm)</label>
+                    <input type="number" class="form-control" id="height">
+                </div>
+                <div class="form-group">
+                    <label for="weight">Weight(kg)</label>
+                    <input type="text" class="form-control" id="weight">
+                </div>
 
 
+                <div class="form-row align-items-center">
+                    <div class="col-auto my-1">
+                        <label class="mr-sm-2" for="activity">Activity</label>
+                        <select class="custom-select mr-sm-2" id="activity">
+                            <option value="0">--Choose--</option>
+                            <option value="1">Basal Metabolic Rate (BMR)</option>
+                            <option value="1.2">Sedentary: little or no exercise</option>
+                            <option value="1.375">Light: exercise 1-3 times/week</option>
+                            <option value="1.465">Moderate: exercise 4-5 times/week</option>
+                            <option value="1.55">Active: daily exercise or intense exercise 3-4 times/week</option>
+                            <option value="1.725">Very Active: intense exercise 6-7 times/week</option>
+                            <option value="1.9">Extra Active: very intense exercise daily, or physical job</option>
+                        </select>
+                    </div>
+
+                </div>
 
 
-        <br><p></p><fieldset><legend>Related:</legend><a href="/bmi-calculator.html">BMI Calculator</a> | <a href="/calorie-calculator.html">Calorie Calculator</a> | <a href="/macro-calculator.html">Macro Calculator</a></fieldset><p></p>
+                <div class="form-check">
+                    <input class="form-check-input gender" type="radio" name="gender" value="5">
+                    <label class="form-check-label" for="gender">
+                        Male
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input gender" type="radio" name="gender" value="-161">
+                    <label class="form-check-label" for="gender">
+                        Female
+                    </label>
+                </div>
+                
+            </form>
+            <button type="submit" class="btn btn-primary" id="cal">Calculate</button>
 
-        <br><h3>What is TDEE?</h3>
-        <p>TDEE stands for total daily energy expenditure. It is the total energy that a person uses in a day. TDEE is hard to measure accurately and varies day by day. More often, it is estimated using factors such as a person's basal metabolic rate (BMR), activity level, and the thermic effect of food.</p>
+            <div id="res" style="padding : 20px">
+            </div>
+            <div>
+                <h2>What is TDEE?</h2>
+                <div class="et_pb_module et_pb_post_content et_pb_post_content_0_tb_body"><p>Want to change your weight?<br>Know what TDEE is?<br>It’s an acronym for Total Daily Energy Expenditure and probably the most important info you’ll need.</p><p>You see, the starting point for any successful body composition change is to first know how much energy you burn.</p><p>Your Total Daily Energy Expenditure (TDEE) represents the total number of calories we burn in a day and is made of 4 Elements: Basal Metabolic Rate (BMR), Non-Exercise Activity Thermogenesis (NEAT), Exercise Activity Thermogenesis (EAT) and your Thermic Effect of Food (TEF).</p><p><br>BMR – 70%.&nbsp;This is how much energy your body burns at rest, it’s the energy required to support your vital body functions.<br>Think the healthy function of your liver, kidneys, brain etc. as well as maintenance of fat free mass.<br>One of the best ways to increase your BMR is to build muscle.<br>This allows you to burn more calories all the time and not just during your workouts affecting the 70% variable without relying on the 5% attributed to Exercise Activity Thermogenesis.</p><p><strong>NEAT – 15%</strong></p><p>This is everything you do outside of your workouts, eating or sleeping.<br>From walking, fidgeting and typing to cooking etc.<br>Focus on getting up your daily steps and prioritising strength training to maximise not just your NEAT but all other variables in your TDEE.</p><p><strong>TEF – 10%</strong></p><p>This is energy required for digestion, absorption and disposal of what you eat.<br>Consider that a calorie isn’t always a calorie and each macronutrient has a different thermic effect. Protein uses 20-25% to process, Carbs 5-15% and Fat 0-5%.<br>Also how the food was cooked, if it’s processed and the freshness will all impact the thermic effect of food.</p><p><strong>EAT – 5%</strong></p><p>This is what you burn during workouts.<br>You really can’t out exercise a bad diet and this is why it’s most important to build nutrition and lifestyle habits before considering the last 5%.</p><p>We recommend not focusing on the calories burnt in workouts alone but prioritising how you can continue to burn more calories on an on-going basis as well as managing stress, getting enough sleep and of course eating right for your goals.</p><p></p>
+                </div>
+            </div>
+        </div>
 
-        <p><b>Basal metabolic rate:</b></p>
-        <p>BMR is a person's energy usage rate while at rest in a temperate environment when the digestive system is inactive. In other words, it is the minimum energy needed to maintain a person's vital organs only.</p>
-
-        <p><b>Activity level:</b></p>
-        <p>Activity level is a factor that is based on the amount of activity a person undergoes. This includes deliberate exercise as well as other activities that a person may undergo as part of their job or typical daily activities. These factors are more specifically referred to as the thermic effect of activity, and non-exercise activity thermogenesis (energy expended for non-sleeping, eating, or sports-like exercise).</p>
-
-        <p><b>Thermic effect of food:</b></p>
-        <p>The thermic effect of food, also referred to as specific dynamic action, is the amount of energy required by the body to process and use food. It is sometimes estimated as 10% of food energy intake, but this can vary significantly dependent on the type of food consumed. Protein for example, has a far larger thermic effect than dietary fat, since it is more difficult to process.</p>
-
-        <h3>How TDEE is calculated?</h3>
-        <p>TDEE is calculated based on the factors described above. The calculation usually begins with an estimation of basal metabolic rate (BMR), which is based on the use of equations that have been developed for this specific purpose. This includes physical characteristics such as age, gender, height, and weight.</p>
-        <p>Some of the more commonly used equations for estimating BMR include the Mifflin St-Jeor Equation, Harris-Benedict equation, and Katch-McArdle Formula. They are generally pretty similar, but the Katch-McArdle Formula, for example, which takes metabolic activity (resulting from differences between lean body mass and body fat) into account, can be more accurate for lean person.</p>
-        <p>Once BMR is calculated, it is typically multiplied by an activity level factor, which is based on factors such as exercise and whether a person has a sedentary or very active job.</p>
-        <p>Other factors that can be considered in the calculation include the thermic effect of food, though this is not always factored into the calculation, and has a relatively smaller impact than BMR and activity level.</p>
 
 
 
     </div>
-    
+
 </div>
+
+<script>
+
+    function CalTdee(weight, height, age, K, R) {
+        var BMR = (9.99 * weight) + (6.25 * height) - (4.92 * age) + K;
+
+        return BMR * R;
+    }
+
+    $("#cal").on('click', function () {
+        var a = $('#age').val()
+        var h = $('#height').val()
+        var w = $('#weight').val()
+        var K = $('#weight').val()
+        var R = $("input[name='gender']:checked").val()
+        var tdee = CalTdee(w, h, a, K, R);
+
+        var resText = "<p style='font-size:45px'>Your TDEE is " + tdee + "</p>";
+
+        $('#res').html('');
+        $('#res').append(resText)
+
+
+
+
+    })
+
+</script>

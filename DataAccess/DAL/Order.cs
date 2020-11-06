@@ -37,9 +37,27 @@ namespace DataAccess.DAL
         public List<OrderDetail> GetDetail(int id)
         {
             return db.OrderDetails.Where(e => e.OrderId == id).ToList();
-
         }
 
-
+        public bool CreateOrder(List<OrderDetail> details, Entity.Order order)
+        {
+            db.Orders.Add(order);
+            db.SaveChanges();
+            int orderId = order.OrderId;
+            if (orderId > 0)
+            {
+                foreach(var item in details)
+                {
+                    item.OrderId = orderId;
+                    db.OrderDetails.Add(item);
+                }
+                var isOk = db.SaveChanges();
+                if (isOk > 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

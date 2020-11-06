@@ -73,12 +73,65 @@ namespace Test.Controllers
             var allCart = (List<CartSession>)Session["Cart"];
             return allCart == null ? 0 : allCart.Count;
         }
+        DataAccess.DAL.Order bll = new DataAccess.DAL.Order();
+        // 1 thành công
+        //2 thất bại
+        //3 chưa đăng nhập
+        public int SaveOrder(OrderSave model)
+        {
+            var user = (ClientLogin)Session["ClientLogin"];
+            if (user != null)
+            {
+                var cart = model.Product;
+                var orderEnti = model.OrderInfo;
 
+                List<OrderDetail> lsDetail = new List<OrderDetail>();
+                DataAccess.Entity.Order order = new DataAccess.Entity.Order();
+                order.Email = orderEnti.Email;
+                order.Phone = orderEnti.Phone;
+                order.Name = orderEnti.Name;
+                order.Address = orderEnti.Address;
+                order.Note = orderEnti.Note;
+                order.Fee = orderEnti.Fee;
+                order.ShipMethod = orderEnti.ShipMethod;
+                order.TotalPrice = orderEnti.TotalPrice;
+
+
+                foreach (var item in cart)
+                {
+                    OrderDetail enti = new OrderDetail();
+                    enti.ProductId = item.ProductId;
+                    enti.Amount = item.Amount;
+                    lsDetail.Add(enti);
+                }
+
+                return bll.CreateOrder(lsDetail, order) ? 1 : 2;
+            }
+            return 3;
+        }
     }
 
     public class CartSession
     {
         public int ProductId { get; set; }
         public int Amount { get; set; }
+    }
+
+    public class OrderModel
+    {
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public string Note { get; set; }
+        public string Fee { get; set; }
+        public string ShipMethod { get; set; }
+        public int TotalPrice { get; set; }
+    }
+
+    public class OrderSave
+    {
+        public List<CartSession> Product { get; set; }
+        public OrderModel OrderInfo { get; set; }
     }
 }

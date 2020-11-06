@@ -30,8 +30,9 @@ namespace DataAccess.Entity
         public bool Status { get; set; }
         public bool Active { get; set; }
 
-
         public string CategoryName { get; set; }
+
+        public int Amount { get; set; }
 
 
     }

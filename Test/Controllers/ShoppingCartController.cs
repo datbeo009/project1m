@@ -31,6 +31,7 @@ namespace Test.Controllers
                     var getpro = getAllProduct.SingleOrDefault(e => e.ProductID == item.ProductId);
                     if (getpro != null)
                     {
+                        getpro.Amount = item.Amount;
                         lsAll.Add(getpro);
                     }
                 }

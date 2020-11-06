@@ -128,13 +128,6 @@
         })
     }
     
-    //Filter Product
-    $(document).on('change', "#IdCat", function () {
-        var cateId = $(this).val();
-        var ftPro = _glbProduct.filter(e => e.CategoryID == cateId);
-        lsProduct(ftPro);
-    })
-
     $(document).on('click', '#IdCat p a', function () {
         var cId = $(this).attr('data-id');
         renderProd(cId);

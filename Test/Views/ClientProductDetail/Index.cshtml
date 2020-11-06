@@ -21,33 +21,34 @@
 </div>
 <!-- slider Area End-->
 <!--================Single Product Area =================-->
-<div class="product_image_area">
+<div>
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-12">
-                <div class="product_img_slide owl-carousel" id="IdPro">
+        <div class="text-center">
+            
+                <div id="IdPro">
                  
                 </div>
-            </div>
-            <div class="col-lg-8">
                 <div class="single_product_text text-center" id="tPro">
-                   
+                   <h3 id="prodTitle"></h3>
+                    <p id="prodDes"></p>
                     <div class="card_area">
                         <div class="product_count_area">
                             <p>Quantity</p>
                             <div class="product_count d-inline-block">
-                                <span class="product_count_item inumber-decrement"> <i class="ti-minus"></i></span>
-                                <input class="product_count_item input-number" type="text" value="1" min="0" max="10">
-                                <span class="product_count_item number-increment"> <i class="ti-plus"></i></span>
+                                <span class="product_count_item inumber-decrement" id="numMinus"> <i class="ti-minus"></i></span>
+                                <input class="product_count_item input-number" id="numToOrd" type="text" value="1" min="0" max="10">
+                                <span class="product_count_item number-increment" id="numPlus"> <i class="ti-plus"></i></span>
                             </div>
-                            
+                            <p>x&nbsp;</p>
+                            <p id="pRice"></p>
+                            <p>&nbsp;VND</p>
                         </div>
                         <div class="add_to_cart">
-                            <a href="#" class="btn_3">add to cart</a>
+                            <a href="#" class="btn_3" id="btnAdd">add to cart</a>
                         </div>
                     </div>
                 </div>
-            </div>
+            
         </div>
     </div>
 </div>
@@ -84,12 +85,52 @@
                     var Description = res.Description;
                     var ProductName = res.ProductName;
                     var Price = res.Price;
-
-                    $('#IdPro').append("<img class='img-fluid' src='" + image + "' alt=''>")
-                    $('#tPro').append("<div><h3>" + ProductName + "</h3><p>" + Description + "</p><div><p>" + Price +"</p></div></div>")
+                    $('#IdPro').append("<img style='max-height:400px' src='" + image + "' alt=''>");
+                    $('#pRice').html(Price);
+                    $('#prodTitle').html(ProductName);
+                    $('#prodDes').html(Description)
                 }
             }
         })
     }
+
+    $("#numToOrd").on('keypress', function (e) {
+        console.log(e);
+        let x = e.which || e.keyCode;
+        if (x < 48 || x > 59) {
+            return false;
+        }
+    });
+
+    $('#numMinus').on('click', function () {
+        var val = parseInt($('#numToOrd').val());
+        if (val - 1 == 0) return;
+        $('#numToOrd').val(val - 1);
+    })
+
+    $('#numPlus').on('click', function () {
+        var val = parseInt($('#numToOrd').val());
+        $('#numToOrd').val(val + 1);
+    })
+
+    $('#btnAdd').on('click', function () {
+        var prodNum = parseInt($('#numToOrd').val());
+        if (prodNum == 0) return false;
+        $.ajax({
+            url: '/ShoppingCart/AddToCart',
+            type: 'post',
+            data: { productId: parseInt(id), amount: prodNum },
+            success: function (res) {
+                if (res) {
+                    alert('Success');
+                    loadCartCount();
+                } else {
+                    alert('Failed');
+                }
+            }
+        })
+        return false;
+    })
+
     ProductLoad();
 </script>

@@ -152,7 +152,7 @@
                                         </div>
                                     </li>
                                     <li>
-                                        <div class="shopping-card">
+                                        <div class="shopping-card" data-content="0" id="spCart">
                                             <a href="cart.html"><i class="fa fa-shopping-cart" style="font-size: x-large;"></i></a>
                                         </div>
                                     </li>
@@ -262,6 +262,20 @@
 
             })
         }
+
+        function loadCartCount() {
+            $.ajax({
+                url: '/ShoppingCart/CartCount',
+                type: 'get',
+                success: function (res) {
+                    if (res) {
+                        $('#spCart').attr('data-content',res)
+                    }
+                }
+            })
+        }
+
+        loadCartCount();
         LoadCategory();
 
 

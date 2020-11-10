@@ -37,72 +37,72 @@
                     </thead>
                     <tbody id="lsProdByCart">
                         @*<tr class="bottom_button">
-                            <td>
-                                <a class="btn_1" href="#">Update Cart</a>
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <div class="cupon_text float-right">
-                                    <a class="btn_1" href="#">Close Coupon</a>
-                                </div>
-                            </td>
-                        </tr>*@
+                                <td>
+                                    <a class="btn_1" href="#">Update Cart</a>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <div class="cupon_text float-right">
+                                        <a class="btn_1" href="#">Close Coupon</a>
+                                    </div>
+                                </td>
+                            </tr>*@
                         @*<tr>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <h5>Subtotal</h5>
-                            </td>
-                            <td>
-                                <h5>$2160.00</h5>
-                            </td>
-                        </tr>*@
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <h5>Subtotal</h5>
+                                </td>
+                                <td>
+                                    <h5>$2160.00</h5>
+                                </td>
+                            </tr>*@
                         @*<tr class="shipping_area">
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <h5>Shipping</h5>
-                            </td>
-                            <td>
-                                <div class="shipping_box">
-                                    <ul class="list">
-                                        <li>
-                                            Flat Rate: $5.00
-                                            <input type="radio" aria-label="Radio button for following text input">
-                                        </li>
-                                        <li>
-                                            Free Shipping
-                                            <input type="radio" aria-label="Radio button for following text input">
-                                        </li>
-                                        <li>
-                                            Flat Rate: $10.00
-                                            <input type="radio" aria-label="Radio button for following text input">
-                                        </li>
-                                        <li class="active">
-                                            Local Delivery: $2.00
-                                            <input type="radio" aria-label="Radio button for following text input">
-                                        </li>
-                                    </ul>
-                                    <h6>
-                                        Calculate Shipping
-                                        <i class="fa fa-caret-down" aria-hidden="true"></i>
-                                    </h6>
-                                    <select class="shipping_select">
-                                        <option value="1">Bangladesh</option>
-                                        <option value="2">India</option>
-                                        <option value="4">Pakistan</option>
-                                    </select>
-                                    <select class="shipping_select section_bg">
-                                        <option value="1">Select a State</option>
-                                        <option value="2">Select a State</option>
-                                        <option value="4">Select a State</option>
-                                    </select>
-                                    <input class="post_code" type="text" placeholder="Postcode/Zipcode" />
-                                    <a class="btn_1" href="#">Update Details</a>
-                                </div>
-                            </td>
-                        </tr>*@
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <h5>Shipping</h5>
+                                </td>
+                                <td>
+                                    <div class="shipping_box">
+                                        <ul class="list">
+                                            <li>
+                                                Flat Rate: $5.00
+                                                <input type="radio" aria-label="Radio button for following text input">
+                                            </li>
+                                            <li>
+                                                Free Shipping
+                                                <input type="radio" aria-label="Radio button for following text input">
+                                            </li>
+                                            <li>
+                                                Flat Rate: $10.00
+                                                <input type="radio" aria-label="Radio button for following text input">
+                                            </li>
+                                            <li class="active">
+                                                Local Delivery: $2.00
+                                                <input type="radio" aria-label="Radio button for following text input">
+                                            </li>
+                                        </ul>
+                                        <h6>
+                                            Calculate Shipping
+                                            <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                        </h6>
+                                        <select class="shipping_select">
+                                            <option value="1">Bangladesh</option>
+                                            <option value="2">India</option>
+                                            <option value="4">Pakistan</option>
+                                        </select>
+                                        <select class="shipping_select section_bg">
+                                            <option value="1">Select a State</option>
+                                            <option value="2">Select a State</option>
+                                            <option value="4">Select a State</option>
+                                        </select>
+                                        <input class="post_code" type="text" placeholder="Postcode/Zipcode" />
+                                        <a class="btn_1" href="#">Update Details</a>
+                                    </div>
+                                </td>
+                            </tr>*@
                     </tbody>
                 </table>
                 <div class="checkout_btn_inner float-right">
@@ -206,28 +206,28 @@
                 lsProd.forEach(c => {
                     $('#lsProdByCart').append(
                         '<tr class="prod-item" data-id="' + c.ProductID + '">' +
-                        '<td>' + 
+                        '<td>' +
                         '<div class="media">' +
                         '<div class="d-flex">' +
-                        '<img src="'+c.ListImage.split(',')[0]+'" style="max-width:100px">' +
+                        '<img src="' + (c.ListImage == null ? "" : c.ListImage.split(',')[0]) + '" style="max-width:100px">' +
                         '</div>' +
                         '<div class="media-body">' +
-                        '<p>'+c.ProductName+'</p>' +
+                        '<p>' + c.ProductName + '</p>' +
                         '</div>' +
                         '</div>' +
                         '</td>' +
-                        '<td><h5 id="price-'+c.ProductID+'">' + c.Price + '</h5></td>' +
+                        '<td><h5 id="price-' + c.ProductID + '">' + c.Price + '</h5></td>' +
                         '<td>' +
                         '<div class="product_count">' +
-                        '<span class="input-number-decrement" id="minus-' + c.ProductID + '"> <i class="ti-minus"></i></span><input class="input-number" id="amount-' + c.ProductID + '" type="text" value="'+c.Amount+'" min="0" max="10"> <span class="input-number-increment" id="plus-' + c.ProductID + '"> <i class="ti-plus"></i></span>' +
+                        '<span class="input-number-decrement" id="minus-' + c.ProductID + '"> <i class="ti-minus"></i></span><input class="input-number" id="amount-' + c.ProductID + '" type="text" value="' + c.Amount + '" min="0" max="10"> <span class="input-number-increment" id="plus-' + c.ProductID + '"> <i class="ti-plus"></i></span>' +
                         '</div>' +
                         '</td>' +
-                        '<td><h5 class="subTT" id="ttp-'+c.ProductID+'">'+(parseInt(c.Amount)*parseInt(c.Price))+'</h5></td>' +
+                        '<td><h5 class="subTT" id="ttp-' + c.ProductID + '">' + (parseInt(c.Amount) * parseInt(c.Price)) + '</h5></td>' +
                         '</tr>'
                     )
                 })
                 $('#lsProdByCart').append(
-                    '<td></td><td></td><td><h5>Subtotal</h5></td><td><h5 id="sttCart">' + calTotalPrice()+'</h5></td>'
+                    '<td></td><td></td><td><h5>Subtotal</h5></td><td><h5 id="sttCart">' + calTotalPrice() + '</h5></td>'
                 )
             }
         })
@@ -256,7 +256,7 @@
         $('#ttp-' + prodId).html(singlePrice * amount);
     }
 
-    $(document).on('keypress','.input-number', function (e) {
+    $(document).on('keypress', '.input-number', function (e) {
         console.log(e);
         let x = e.which || e.keyCode;
         if (x < 48 || x > 59) {
@@ -293,7 +293,7 @@
         $('.prod-item').each(function () {
             var id = $(this).attr('data-id'),
                 objProd = new Object();
-            objProd.ProductId = id;
+            objProd.ProductId = parseInt(id);
             objProd.Amount = parseInt($('#amount-' + id).val());
             subObj.Product.push(objProd);
         })
@@ -303,11 +303,11 @@
         subObj.OrderInfo.Address = $('#txtAddress').val();
         subObj.OrderInfo.Note = $('#txtNote').val();
         subObj.OrderInfo.ShipMethod = $('#cboShipMethod').val();
-        subObj.OrderInfo.TotalPrice = parseInt($('#sttCart').val());
+        subObj.OrderInfo.TotalPrice = parseInt($('#sttCart').html());
         $.ajax({
             url: '/ShoppingCart/SaveOrder',
-            type: 'get',
-            data: subObj,
+            type: 'Post',
+            data: { model: subObj },
             success: function (res) {
                 if (res == 1) {
                     alert('Success');

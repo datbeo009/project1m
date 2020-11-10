@@ -35,58 +35,8 @@
                             <th scope="col">Total</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="media">
-                                    <div class="d-flex">
-                                        <img src="assets/img/arrivel/arrivel_1.png" alt="" />
-                                    </div>
-                                    <div class="media-body">
-                                        <p>Minimalistic shop for multipurpose use</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <h5>$360.00</h5>
-                            </td>
-                            <td>
-                                <div class="product_count">
-                                    <span class="input-number-decrement"> <i class="ti-minus"></i></span>
-                                    <input class="input-number" type="text" value="1" min="0" max="10">
-                                    <span class="input-number-increment"> <i class="ti-plus"></i></span>
-                                </div>
-                            </td>
-                            <td>
-                                <h5>$720.00</h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="media">
-                                    <div class="d-flex">
-                                        <img src="assets/img/arrivel/arrivel_2.png" alt="" />
-                                    </div>
-                                    <div class="media-body">
-                                        <p>Minimalistic shop for multipurpose use</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <h5>$360.00</h5>
-                            </td>
-                            <td>
-                                <div class="product_count">
-                                    <span class="input-number-decrement"> <i class="ti-minus"></i></span>
-                                    <input class="input-number" type="text" value="1" min="0" max="10">
-                                    <span class="input-number-increment"> <i class="ti-plus"></i></span>
-                                </div>
-                            </td>
-                            <td>
-                                <h5>$720.00</h5>
-                            </td>
-                        </tr>
-                        <tr class="bottom_button">
+                    <tbody id="lsProdByCart">
+                        @*<tr class="bottom_button">
                             <td>
                                 <a class="btn_1" href="#">Update Cart</a>
                             </td>
@@ -97,8 +47,8 @@
                                     <a class="btn_1" href="#">Close Coupon</a>
                                 </div>
                             </td>
-                        </tr>
-                        <tr>
+                        </tr>*@
+                        @*<tr>
                             <td></td>
                             <td></td>
                             <td>
@@ -107,8 +57,8 @@
                             <td>
                                 <h5>$2160.00</h5>
                             </td>
-                        </tr>
-                        <tr class="shipping_area">
+                        </tr>*@
+                        @*<tr class="shipping_area">
                             <td></td>
                             <td></td>
                             <td>
@@ -152,103 +102,260 @@
                                     <a class="btn_1" href="#">Update Details</a>
                                 </div>
                             </td>
-                        </tr>
+                        </tr>*@
                     </tbody>
                 </table>
                 <div class="checkout_btn_inner float-right">
-                    <a class="btn_1" href="#">Continue Shopping</a>
-                    <a class="btn_1 checkout_btn_1" href="#">Proceed to checkout</a>
+                    <a class="btn_1" href="/">Continue Shopping</a>
+                    <a class="btn_1 checkout_btn_1" id="btnCheckOut" href="#">Proceed to checkout</a>
                 </div>
             </div>
         </div>
 </section>
-<!--================End Cart Area =================-->
-<footer>
-    <!-- Footer Start-->
-    <div class="footer-area footer-padding2">
-        <div class="container">
-            <div class="row d-flex justify-content-between">
-                <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
-                    <div class="single-footer-caption mb-50">
-                        <div class="single-footer-caption mb-30">
-                            <!-- logo -->
-                            <div class="footer-logo">
-                                <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
-                            </div>
-                            <div class="footer-tittle">
-                                <div class="footer-pera">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore.</p>
-                                </div>
-                            </div>
+<div class="modal" id="mdCheckOut" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 1200px!important">
+        <div class="modal-content">
+            <div class="card">
+                <div class="card-header"><strong>Checkout</strong><div class="fa fa-times closeMDCheckout" style="float:right"></div></div>
+                <div class="card-body card-block" style="overflow:scroll">
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="txtEmail" class=" form-control-label">Email</label></div>
+                        <div class="col-12 col-md-9">
+                            <input type="email" id="txtEmail" placeholder="Example:estore@gmail.com" class="form-control">
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-2 col-lg-3 col-md-3 col-sm-5">
-                    <div class="single-footer-caption mb-50">
-                        <div class="footer-tittle">
-                            <h4>Quick Links</h4>
-                            <ul>
-                                <li><a href="#">About</a></li>
-                                <li><a href="#"> Offers & Discounts</a></li>
-                                <li><a href="#"> Get Coupon</a></li>
-                                <li><a href="#">  Contact Us</a></li>
-                            </ul>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="txtPhoneNumber" class=" form-control-label">Phone number</label></div>
+                        <div class="col-12 col-md-9">
+                            <input type="text" id="txtPhoneNumber" placeholder="Phone number" class="form-control">
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-7">
-                    <div class="single-footer-caption mb-50">
-                        <div class="footer-tittle">
-                            <h4>New Products</h4>
-                            <ul>
-                                <li><a href="#">Woman Cloth</a></li>
-                                <li><a href="#">Fashion Accessories</a></li>
-                                <li><a href="#"> Man Accessories</a></li>
-                                <li><a href="#"> Rubber made Toys</a></li>
-                            </ul>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="txtName" class=" form-control-label">Name</label></div>
+                        <div class="col-12 col-md-9">
+                            <input type="text" id="txtName" placeholder="Name" class="form-control">
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-5 col-sm-7">
-                    <div class="single-footer-caption mb-50">
-                        <div class="footer-tittle">
-                            <h4>Support</h4>
-                            <ul>
-                                <li><a href="#">Frequently Asked Questions</a></li>
-                                <li><a href="#">Terms & Conditions</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Report a Payment Issue</a></li>
-                            </ul>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="txtAddress" class=" form-control-label">Address</label></div>
+                        <div class="col-12 col-md-9">
+                            <input type="text" id="txtAddress" placeholder="Address" class="form-control">
                         </div>
                     </div>
-                </div>
-            </div>
-            <!-- Footer bottom -->
-            <div class="row">
-                <div class="col-xl-7 col-lg-7 col-md-7">
-                    <div class="footer-copy-right">
-                        <p>
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Copyright &copy;
-                            <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        </p>
-                    </div>
-                </div>
-                <div class="col-xl-5 col-lg-5 col-md-5">
-                    <div class="footer-copy-right f-right">
-                        <!-- social -->
-                        <div class="footer-social">
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-behance"></i></a>
-                            <a href="#"><i class="fas fa-globe"></i></a>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="txtNote" class=" form-control-label">Note</label></div>
+                        <div class="col-12 col-md-9">
+                            <input type="text" id="txtNote" placeholder="Note" class="form-control">
                         </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="cboShipMethod" class=" form-control-label">Ship method</label></div>
+                        <div class="col-12 col-md-9">
+                            <select name="ShipMethod" id="cboShipMethod" class="form-control">
+                                <option value="COD">COD</option>
+                                <option value="Viettel Post">Viettel Post</option>
+                                <option value="GHTK">GHTK</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary closeMDCheckout">Close</button>
+                        <button type="button" class="btn btn-primary" id="btnAccept">Checkout</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Footer End-->
-</footer>
+</div>
+<div class="modal" id="mdLogin" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="card">
+                <div class="card-header"><strong>Checkout</strong><div class="fa fa-times closedMDLogin" style="float:right"></div></div>
+                <div class="card-body card-block" style="overflow:scroll">
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="txtLgEmail" class=" form-control-label">Email</label></div>
+                        <div class="col-12 col-md-9">
+                            <input type="email" id="txtLgEmail" placeholder="Example:estore@gmail.com" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="txtPassword" class=" form-control-label">Password</label></div>
+                        <div class="col-12 col-md-9">
+                            <input type="password" id="txtPassword" placeholder="Password" class="form-control">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary closedMDLogin">Close</button>
+                        <button type="button" class="btn btn-primary" id="btnLgin">Login</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var lsProd;
+    function getlsProduct() {
+        $.ajax({
+            url: '/ShoppingCart/GetAllProuctByCart',
+            type: 'get',
+            success: function (res) {
+                lsProd = JSON.parse(res);
+                console.log(lsProd);
+                lsProd.forEach(c => {
+                    $('#lsProdByCart').append(
+                        '<tr class="prod-item" data-id="' + c.ProductID + '">' +
+                        '<td>' + 
+                        '<div class="media">' +
+                        '<div class="d-flex">' +
+                        '<img src="'+c.ListImage.split(',')[0]+'" style="max-width:100px">' +
+                        '</div>' +
+                        '<div class="media-body">' +
+                        '<p>'+c.ProductName+'</p>' +
+                        '</div>' +
+                        '</div>' +
+                        '</td>' +
+                        '<td><h5 id="price-'+c.ProductID+'">' + c.Price + '</h5></td>' +
+                        '<td>' +
+                        '<div class="product_count">' +
+                        '<span class="input-number-decrement" id="minus-' + c.ProductID + '"> <i class="ti-minus"></i></span><input class="input-number" id="amount-' + c.ProductID + '" type="text" value="'+c.Amount+'" min="0" max="10"> <span class="input-number-increment" id="plus-' + c.ProductID + '"> <i class="ti-plus"></i></span>' +
+                        '</div>' +
+                        '</td>' +
+                        '<td><h5 class="subTT" id="ttp-'+c.ProductID+'">'+(parseInt(c.Amount)*parseInt(c.Price))+'</h5></td>' +
+                        '</tr>'
+                    )
+                })
+                $('#lsProdByCart').append(
+                    '<td></td><td></td><td><h5>Subtotal</h5></td><td><h5 id="sttCart">' + calTotalPrice()+'</h5></td>'
+                )
+            }
+        })
+    }
+
+    $(document).on('click', '.input-number-decrement', function () {
+        var pId = $(this).attr('id').split('minus-')[1],
+            crNum = $('#amount-' + pId).val();
+        if (crNum == 0) return;
+        $('#amount-' + pId).val(parseInt(crNum) - 1);
+        calTotalPricePerProd(pId);
+        $('#sttCart').html(calTotalPrice());
+    })
+
+    $(document).on('click', '.input-number-increment', function () {
+        var pId = $(this).attr('id').split('plus-')[1],
+            crNum = $('#amount-' + pId).val();
+        $('#amount-' + pId).val(parseInt(crNum) + 1);
+        calTotalPricePerProd(pId);
+        $('#sttCart').html(calTotalPrice());
+    })
+
+    function calTotalPricePerProd(prodId) {
+        var singlePrice = parseInt($('#price-' + prodId).html()),
+            amount = parseInt($('#amount-' + prodId).val());
+        $('#ttp-' + prodId).html(singlePrice * amount);
+    }
+
+    $(document).on('keypress','.input-number', function (e) {
+        console.log(e);
+        let x = e.which || e.keyCode;
+        if (x < 48 || x > 59) {
+            return false;
+        }
+    });
+
+    $('#btnCheckOut').on('click', function () {
+        $('#mdCheckOut').show();
+        return false;
+    })
+
+    $('#btnAccept').on('click', function () {
+        if ($('#txtEmail').val().trim().length == 0) {
+            alert('Invalid Email');
+            return false;
+        }
+        if ($('#txtPhoneNumber').val().trim().length == 0) {
+            alert('Invalid phone number');
+            return false;
+        }
+        if ($('#txtName').val().trim().length == 0) {
+            alert('Invalid name');
+            return false;
+        }
+        if ($('#txtAddress').val().trim().length == 0) {
+            alert('Invalid Address');
+            return false;
+        }
+        var subObj = {
+            Product: [],
+            OrderInfo: {}
+        };
+        $('.prod-item').each(function () {
+            var id = $(this).attr('data-id'),
+                objProd = new Object();
+            objProd.ProductId = id;
+            objProd.Amount = parseInt($('#amount-' + id).val());
+            subObj.Product.push(objProd);
+        })
+        subObj.OrderInfo.Email = $('#txtEmail').val();
+        subObj.OrderInfo.Phone = $('#txtPhoneNumber').val();
+        subObj.OrderInfo.Name = $('#txtName').val();
+        subObj.OrderInfo.Address = $('#txtAddress').val();
+        subObj.OrderInfo.Note = $('#txtNote').val();
+        subObj.OrderInfo.ShipMethod = $('#cboShipMethod').val();
+        subObj.OrderInfo.TotalPrice = parseInt($('#sttCart').val());
+        $.ajax({
+            url: '/ShoppingCart/SaveOrder',
+            type: 'get',
+            data: subObj,
+            success: function (res) {
+                if (res == 1) {
+                    alert('Success');
+                    location.reload();
+                } else if (res == 2) {
+                    alert('Error');
+                } else {
+                    alert('Please login!');
+                    $('#mdLogin').show();
+                    //$('#mdCheckout').hide();
+                }
+            }
+        })
+    })
+
+    $('#btnLgin').on('click', function () {
+        var user = $('#txtLgEmail').val(),
+            pwd = $('#txtPassword').val();
+        $.ajax({
+            url: '/ClientLogin/ClientLogin',
+            type: 'get',
+            data: { username: user, password: pwd },
+            success: function (res) {
+                if (res == 'True') {
+                    alert('Login Success');
+                    $('#mdLogin').hide();
+                } else {
+                    alert('Login failed');
+                }
+            }
+        })
+    })
+
+    $('.closeMDCheckout').on('click', function () {
+        $('#mdCheckOut').hide();
+    })
+
+    $('.closedMDLogin').on('click', function () {
+        $('#mdLogin').hide();
+    })
+
+    function calTotalPrice() {
+        var result = 0;
+        $('.subTT').each(function () {
+            var num = parseInt($(this).html());
+            result += num;
+        })
+        return result;
+    }
+    getlsProduct();
+</script>

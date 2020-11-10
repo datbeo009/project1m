@@ -115,9 +115,9 @@
             $.ajax({
                 url: '/Admin/Order/ApprovedOrder',
                 type: 'get',
-                data: JSON.stringify({ id: oId, isDenied: false }),
+                data: { id: oId, isDenied: false },
                 success: function (res) {
-                    if (res) {
+                    if (res=='True') {
                         alert('Success');
                         loadOrder();
                     } else {
@@ -131,9 +131,9 @@
             $.ajax({
                 url: '/Admin/Order/ApprovedOrder',
                 type: 'get',
-                data: JSON.stringify({ id: oId, isDenied: true }),
+                data: { id: oId, isDenied: true },
                 success: function (res) {
-                    if (res) {
+                    if (res=='True') {
                         alert('Success');
                         loadOrder();
                     } else {
@@ -142,9 +142,17 @@
                 }
             })
         })
-    function resetForm() {
-        
-    }
+        .on('click', '.btnView', function () {
+            var oId = $(this).attr('data-id');
+            $.ajax({
+                url: '/Admin/Order/GetDetail',
+                type: 'get',
+                data: { id: parseInt(oId) },
+                success: function (res) {
+                    console.log(res);
+                }
+            })
+        })
 
     $('#closeDetail').on('click', function () {
         $('#mdDetail').hide();
@@ -155,7 +163,7 @@
         var lsDataFinal = data.slice(recPerPage * parseInt(currPage));
         lsDataFinal.forEach((e, i) => {
             if (i >= recPerPage) return;
-            lsOrder.append("<tr><th scope='row'>" + e.Idx + "</th><td>" + e.Name + "</td><td>" + e.Address + "</td><td>" + e.Note + "</td><td>" + e.Status + "</td><td > <a data-id='" + e.OrderId + "' class='btnView'><i class='fa fa-eye'></i></a>" + (e.Status == 0 ? " <a data-id='" + e.OrderId + "' class='btnApproved'><i class='fa fa-wrench'></i></a>" : "") + (e.Status == 0 ? " <a class='btnCancel' data-id='" + e.OrderId + "'><i class='fa fa-times-circle' ></i></a></td></tr>" : (e.Status == 1 ? " <a class='btnCancel' data-id='" + e.OrderId + "'><i class='fa fa-times-circle' ></i></a></td></tr>":"")) );
+            lsOrder.append("<tr><th scope='row'>" + e.Idx + "</th><td>" + e.Name + "</td><td>" + e.Address + "</td><td>" + e.Note + "</td><td>" + e.Status + "</td><td > <a data-id='" + e.OrderId + "' class='btnView'><i class='fa fa-eye'></i></a>" + (e.Status == 0 ? " <a data-id='" + e.OrderId + "' class='btnApproved'><i class='fa fa-check-circle' style='color:green'></i></a>" : "") + (e.Status == 0 ? " <a class='btnCancel' data-id='" + e.OrderId + "'><i class='fa fa-times-circle' style='color:red' ></i></a></td></tr>" : (e.Status == 1 ? " <a class='btnCancel' data-id='" + e.OrderId + "'><i class='fa fa-times-circle' style='color:red' ></i></a></td></tr>":"")) );
         })
     }
 

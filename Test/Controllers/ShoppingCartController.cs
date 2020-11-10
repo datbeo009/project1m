@@ -1,5 +1,6 @@
 ﻿using DataAccess.DAL;
 using DataAccess.Entity;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace Test.Controllers
         }
 
 
-        public List<Product> GetAllProuctByCart()
+        public string GetAllProuctByCart()
         {
             List<Product> lsAll = new List<Product>();
             var allCart = (List<CartSession>)Session["Cart"];
@@ -36,7 +37,7 @@ namespace Test.Controllers
                     }
                 }
             }
-            return lsAll;
+            return JsonConvert.SerializeObject(lsAll);
 
         }
 
@@ -109,7 +110,7 @@ namespace Test.Controllers
            
                 if (bll.CreateOrder(lsDetail, order))
                 {
-                    Session["ClientLogin"] = null;
+                    Session["Cart"] = null;
                     return 1;
                 }
                 else

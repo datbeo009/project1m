@@ -34,9 +34,23 @@ namespace DataAccess.DAL
             return false;
         }
 
-        public List<OrderDetail> GetDetail(int id)
+        public List<Product> GetDetail(int id)
         {
-            return db.OrderDetails.Where(e => e.OrderId == id).ToList();
+            List<Product> lspro = new List<Product>();
+            var orderDetail =  db.OrderDetails.Where(e => e.OrderId == id).ToList();
+            var getAllProduct = db.Products.ToList();
+            foreach (var item in orderDetail)
+            {
+                Product enti = new Product();
+                var onePro = getAllProduct.SingleOrDefault(e => e.ProductID == item.ProductId);
+                if (onePro != null)
+                {
+                    enti = onePro;
+                    enti.Amount = item.Amount;
+                    lspro.Add(enti);
+                }
+            }
+            return lspro;
         }
 
         public bool CreateOrder(List<OrderDetail> details, Entity.Order order)

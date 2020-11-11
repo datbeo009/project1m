@@ -6,7 +6,7 @@
 <!-- slider Area Start-->
 <div class="slider-area ">
     <!-- Mobile Menu -->
-    <div class="single-slider slider-height2 d-flex align-items-center" data-background="~/assets/img/hero/category.jpg" style="background-color:antiquewhite">
+    <div class="single-slider slider-height2 d-flex align-items-center" data-background="~/assets/img/hero/category.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
@@ -27,7 +27,7 @@
                 <div class="product_sidebar">
                     <div class="single_sedebar">
                         <form action="#">
-                            <input type="text" name="#" placeholder="Search keyword">
+                            <input type="text" id="txtSearch" placeholder="Search keyword">
                             <i class="ti-search"></i>
                         </form>
                     </div>
@@ -73,7 +73,8 @@
 <!-- subscribe part end -->
 <script>
     var _glbProduct;
-    var lsProduct = $('#atContent');
+    var lsProduct = $('#atContent'),
+        curCate = getParamFromUrl('cate');
     function LoadProduct() {
         lsProduct.html('');
         $.ajax({
@@ -83,8 +84,7 @@
                 res = JSON.parse(res);
                 _glbProduct = res;
                 if (_glbProduct) {
-                    var curCate = getParamFromUrl('cate');
-                    renderProd(curCate);
+                    renderProd(curCate, $('#txtSearch').val());
                 }
             }
         })
@@ -96,8 +96,8 @@
         return url.searchParams.get(p);
     }
 
-    function renderProd(cateId) {
-        var lsToShow = parseInt(cateId)!=0? _glbProduct.filter(c => c.CategoryID == cateId):_glbProduct;
+    function renderProd(cateId, searchVal) {
+        var lsToShow = parseInt(cateId) != 0 ? _glbProduct.filter(c => c.CategoryID == cateId && c.ProductName.indexOf(searchVal) >= 0) : _glbProduct.filter(c => c.ProductName.indexOf(searchVal) >= 0);
         lsProduct.html('');
         lsToShow.forEach(e => {
             var ProductName = e.ProductName;
@@ -129,9 +129,14 @@
     }
     
     $(document).on('click', '#IdCat p a', function () {
-        var cId = $(this).attr('data-id');
-        renderProd(cId);
+        var sVal = $('#txtSearch').val();
+        curCate = $(this).attr('data-id');
+        renderProd(curCate,sVal);
         return false;
+    })
+
+    $('#txtSearch').on('keyup', function () {
+        renderProd(curCate, $(this).val());
     })
     LoadProduct();
     LoadCategory();

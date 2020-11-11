@@ -230,9 +230,8 @@
     </footer>
 
     <script>
-        var submenu = $('#productSubmenu')
         function LoadCategory() {
-            submenu.html('');
+            $('#productSubmenu').html('');
             $.ajax({
                 url: "/ClientCategory/Gets",
                 type: "Get",
@@ -241,7 +240,8 @@
                     if (res) {
                         res.forEach(e => {
                             var CategoryName = e.CategoryName;
-                            $('#productSubmenu').append("<li><a style='font-size:20px' href='/ClientProduct/Index?cate=" + e.CategoryID + "'>" + CategoryName + "</a></li>")
+                            $('#productSubmenu').append("<li><a style='font-size:20px' href='/ClientProduct/Index?cate=" + e.CategoryID + "'>" + CategoryName + "</a></li>");
+                            $('.cat-list').append('<li><a href="/ClientProduct/Index?cate=' + e.CategoryID + '" class="d-flex"><p>'+e.CategoryName+'</p></a></li>')
                         })
                     }
                 }

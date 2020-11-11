@@ -37,7 +37,7 @@ namespace Test.Areas.Admin.Controllers
             entity.ListImage = model.ListImage;
             entity.Image = model.Image;
             entity.CreatedDate = model.CreatedDate;
-    
+            entity.Status = 1;
     
             return artBll.CreateOrUpdateArticle(entity);
         }

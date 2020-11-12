@@ -33,7 +33,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Order Detail</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close closeDetail" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -41,8 +41,8 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">STT</th>
                                 <th scope="col">Product Name</th>
+                                <th scope="col">Amount</th>
                                 <th scope="col">Price</th>
                             </tr>
                         </thead>
@@ -50,7 +50,7 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeDetail">Close</button>
+                    <button type="button" class="btn btn-secondary closeDetail" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -149,12 +149,17 @@
                 type: 'get',
                 data: { id: parseInt(oId) },
                 success: function (res) {
-                    console.log(res);
+                    $('#dataDetail').html('');
+                    var lsProd = JSON.parse(res);
+                    lsProd.forEach(e => {
+                        $('#dataDetail').append("<tr><td>" + e.ProductName + "</td><td>" + e.Amount +"</td><td>" + (e.Price*e.Amount) + "</td></tr>")
+                    })
+                    $('#mdDetail').show();
                 }
             })
         })
 
-    $('#closeDetail').on('click', function () {
+    $('.closeDetail').on('click', function () {
         $('#mdDetail').hide();
     })
 

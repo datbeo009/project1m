@@ -169,7 +169,7 @@
         var lsDataFinal = data.slice(recPerPage * parseInt(currPage));
         lsDataFinal.forEach((e, i) => {
             if (i >= recPerPage) return;
-            lsOrder.append("<tr><th scope='row'>" + e.Idx + "</th><td>" + e.Name + "</td><td>" + e.Address + "</td><td>" + e.Note + "</td><td>" + e.Status + "</td><td > <a data-id='" + e.OrderId + "' class='btnView'><i class='fa fa-eye'></i></a>" + (e.Status == 0 ? " <a data-id='" + e.OrderId + "' class='btnApproved'><i class='fa fa-check-circle' style='color:green'></i></a>" : "") + (e.Status == 0 ? " <a class='btnCancel' data-id='" + e.OrderId + "'><i class='fa fa-times-circle' style='color:red' ></i></a></td></tr>" : (e.Status == 1 ? " <a class='btnCancel' data-id='" + e.OrderId + "'><i class='fa fa-times-circle' style='color:red' ></i></a></td></tr>":"")) );
+            lsOrder.append("<tr><th scope='row'>" + e.Idx + "</th><td>" + e.Name + "</td><td>" + e.Address + "</td><td>" + e.Note + "</td><td>" + e.Status + "</td><td > <a data-id='" + e.OrderId + "' class='btnView btn btn-sm btn-info'>Info</a>" + (e.Status == 0 ? " <a data-id='" + e.OrderId + "' class='btnApproved btn btn-sm btn-primary'>Approve</a>" : "") + (e.Status == 0 ? " <a class='btnCancel btn btn-sm btn-secondary' data-id='" + e.OrderId + "'>Cancel</a></td></tr>" : (e.Status == 1 ? " <a class='btnCancel btn btn-sm btn-secondary' data-id='" + e.OrderId + "'>Cancel</a></td></tr>":"")) );
         })
     }
 

@@ -31,56 +31,42 @@
                     </div>
                 </div>
                 <div class="navigation-top">
-                    <div class="d-sm-flex justify-content-between text-center">
-                        <p class="like-info">
-                            <span class="align-middle"><i class="fa fa-heart"></i></span> Lily and 4
-                            people like this
-                        </p>
-                        <div class="col-sm-4 text-center my-2 my-sm-0">
-                            <!-- <p class="comment-count"><span class="align-middle"><i class="fa fa-comment"></i></span> 06 Comments</p> -->
-                        </div>
-                        <ul class="social-icons">
-                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
-                            <li><a href="#"><i class="fab fa-behance"></i></a></li>
-                        </ul>
-                    </div>
+                    
                     <div class="navigation-area">
                         <div class="row">
-                            <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
+                            <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center" id="prvDiv">
                                 <div class="thumb">
-                                    <a href="#">
-                                        <img class="img-fluid" src="~/assetclient/assets/img/post/preview.png" alt="">
+                                    <a href="#" class="prvPostLink">
+                                        <img class="img-fluid" src="~/assetclient/assets/img/post/preview.png" id="prvPostImg" style="width:60px;height:60px">
                                     </a>
                                 </div>
                                 <div class="arrow">
-                                    <a href="#">
+                                    <a href="#" class="prvPostLink">
                                         <span class="lnr text-white ti-arrow-left"></span>
                                     </a>
                                 </div>
                                 <div class="detials">
                                     <p>Prev Post</p>
-                                    <a href="#">
-                                        <h4>Space The Final Frontier</h4>
+                                    <a href="#" class="prvPostLink">
+                                        <h4 id="prvPostTitle">Space The Final Frontier</h4>
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
+                            <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center" id="nxtDiv">
                                 <div class="detials">
                                     <p>Next Post</p>
-                                    <a href="#">
-                                        <h4>Telescopes 101</h4>
-                                    </a>
-                                </div>
-                                <div class="arrow">
-                                    <a href="#">
-                                        <span class="lnr text-white ti-arrow-right"></span>
+                                    <a href="#" class="nxtPostLink">
+                                        <h4 id="nxtPostTitle">Telescopes 101</h4>
                                     </a>
                                 </div>
                                 <div class="thumb">
-                                    <a href="#">
-                                        <img class="img-fluid" src="~/assetclient/assets/img/post/next.png" alt="">
+                                    <a href="#" class="nxtPostLink">
+                                        <img class="img-fluid" src="~/assetclient/assets/img/post/next.png" id="nxtPostImg" style="width:60px;height:60px">
+                                    </a>
+                                </div>
+                                <div class="arrow">
+                                    <a href="#" class="nxtPostLink">
+                                        <span class="lnr text-white ti-arrow-right"></span>
                                     </a>
                                 </div>
                             </div>
@@ -209,7 +195,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="button button-contactForm btn_1 boxed-btn">Send Message</button>
+                            <button type="button" class="button button-contactForm btn_1 boxed-btn">Send Message</button>
                         </div>
                     </form>
                 </div>
@@ -223,78 +209,34 @@
                             
                         </ul>
                     </aside>
-                    <aside class="single_sidebar_widget popular_post_widget">
+                    <aside class="single_sidebar_widget popular_post_widget" id="otherPost">
                         <h3 class="widget_title">Recent Post</h3>
-                        <div class="media post_item">
-                            <img src="~/assetclient/assets/img/post/post_1.png" alt="post">
-                            <div class="media-body">
-                                <a href="single-blog.html">
-                                    <h3>From life was you fish...</h3>
-                                </a>
-                                <p>January 12, 2019</p>
-                            </div>
-                        </div>
-                        <div class="media post_item">
-                            <img src="~/assetclient/assets/img/post/post_2.png" alt="post">
-                            <div class="media-body">
-                                <a href="single-blog.html">
-                                    <h3>The Amazing Hubble</h3>
-                                </a>
-                                <p>02 Hours ago</p>
-                            </div>
-                        </div>
-                        <div class="media post_item">
-                            <img src="~/assetclient/assets/img/post/post_3.png" alt="post">
-                            <div class="media-body">
-                                <a href="single-blog.html">
-                                    <h3>Astronomy Or Astrology</h3>
-                                </a>
-                                <p>03 Hours ago</p>
-                            </div>
-                        </div>
-                        <div class="media post_item">
-                            <img src="~/assetclient/assets/img/post/post_4.png" alt="post">
-                            <div class="media-body">
-                                <a href="single-blog.html">
-                                    <h3>Asteroids telescope</h3>
-                                </a>
-                                <p>01 Hours ago</p>
-                            </div>
-                        </div>
+                        
                     </aside>
                     
                     <aside class="single_sidebar_widget instagram_feeds">
                         <h4 class="widget_title">Instagram Feeds</h4>
                         <ul class="instagram_row flex-wrap">
                             <li>
-                                <a href="#">
+                                
                                     <img class="img-fluid" src="~/assetclient/assets/img/post/post_5.png" alt="">
-                                </a>
+                                
                             </li>
                             <li>
-                                <a href="#">
                                     <img class="img-fluid" src="~/assetclient/assets/img/post/post_6.png" alt="">
-                                </a>
+                                
                             </li>
                             <li>
-                                <a href="#">
                                     <img class="img-fluid" src="~/assetclient/assets/img/post/post_7.png" alt="">
-                                </a>
                             </li>
                             <li>
-                                <a href="#">
                                     <img class="img-fluid" src="~/assetclient/assets/img/post/post_8.png" alt="">
-                                </a>
                             </li>
                             <li>
-                                <a href="#">
                                     <img class="img-fluid" src="~/assetclient/assets/img/post/post_9.png" alt="">
-                                </a>
                             </li>
                             <li>
-                                <a href="#">
                                     <img class="img-fluid" src="~/assetclient/assets/img/post/post_10.png" alt="">
-                                </a>
                             </li>
                         </ul>
                     </aside>
@@ -318,16 +260,48 @@
                     var image = res.ListImage ? res.ListImage.split(",")[0] : "/assetclient/assets/img/noimage.jpg"
                     var Title = res.Title;
                     var Content = res.Content;
-
                     $('#IdBlog').append("<img class='img-fluid' src='" + image + "' alt=''>")
                     $('#tBlog').append("<div<h2>" + Title + "</h2><p>" + Content +"</p></div>")
-
                 }
             }
-
-
         })
     }
+    function getOtherPost() {
+        $.ajax({
+            url: '/ClientArticle/Gets',
+            type: "Get",
+            success: function (res) {
+                res = JSON.parse(res);
+                var pos = res.indexOf(res.find(c => c.ID == id));
+                if (pos == 0) {
+                    $('#prvDiv').css({ 'visibility': 'hidden' });
+                    $('.nxtPostLink').attr('href', '/ClientArticleDetail/Index/' + res[pos + 1].ID);
+                    $('#nxtPostImg').attr('src', res[pos + 1].ListImage.split(',')[0]);
+                    $('#nxtPostTitle').html(res[pos + 1].Title);
+                } else if (pos == (res.length - 1)) {
+                    $('#nxtDiv').css({ 'visibility': 'hidden' });
+                    $('.prvPostLink').attr('href', '/ClientArticleDetail/Index/' + res[pos - 1].ID);
+                    $('#prvPostImg').attr('src', res[pos - 1].ListImage.split(',')[0]);
+                    $('#prvPostTitle').html(res[pos - 1].Title);
+                } else {
+                    $('.prvPostLink').attr('href', '/ClientArticleDetail/Index/' + res[pos - 1].ID);
+                    $('#prvPostImg').attr('src', res[pos - 1].ListImage.split(',')[0]);
+                    $('#prvPostTitle').html(res[pos - 1].Title);
+                    $('.nxtPostLink').attr('href', '/ClientArticleDetail/Index/' + res[pos + 1].ID);
+                    $('#nxtPostImg').attr('src', res[pos + 1].ListImage.split(',')[0]);
+                    $('#nxtPostTitle').html(res[pos + 1].Title);
+                }
+                
+                var lsPost = res.filter(c => c.ID != id);
+                lsPost.forEach((e, i) => {
+                    if (i >= 4) return;
+                    $('#otherPost').append('<div class="media post_item"><img src="' + e.ListImage.split(',')[0] + '" style="max-width:80px;max-height:80px"><div class="media-body"><a href="/ClientArticleDetail/Index/' + e.ID + '"><h3>'+e.Title+'</h3></a></div></div>')
+                })
+            }
+        })
+    }
+
+    getOtherPost();
     ArticleLoad();
 </script>
 <!--================ Blog Area end =================-->

@@ -1,5 +1,6 @@
 ﻿using DataAccess.DAL;
 using DataAccess.Entity;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,6 +53,18 @@ namespace Test.Controllers
                 }
             }
             return false;
+        }
+
+        [HttpGet]
+        public string CheckLogInfo()
+        {
+            var session = Session["ClientLogin"];
+            return JsonConvert.SerializeObject(session);
+        }
+
+        public void LogOut()
+        {
+            Session["ClientLogin"] = null;
         }
     }
    

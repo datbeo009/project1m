@@ -30,7 +30,7 @@
                             There are advances being made in science and technology
                             everyday, and a good example of this is the
                         </p>
-                        <a href="#" class="btn_3">Create an Account</a>
+                        <a href="#" class="btn_3" id="btnReg">Create an Account</a>
                     </div>
                 </div>
             </div>
@@ -38,22 +38,18 @@
                 <div class="login_part_form">
                     <div class="login_part_form_iner">
                         <h3>
-                            Welcome Back ! <br>
+                            Welcome! <br>
                             Please Sign in now
                         </h3>
                         <form class="row contact_form" action="#" method="post" novalidate="novalidate">
                             <div class="col-md-12 form-group p_star">
-                                <input type="text" class="form-control" id="name" name="name" value="" placeholder="Username">
+                                <input type="text" class="form-control" id="txtuserName" name="name" placeholder="Username">
                             </div>
                             <div class="col-md-12 form-group p_star">
-                                <input type="password" class="form-control" id="password" name="password" value="" placeholder="Password">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                             </div>
                             <div class="col-md-12 form-group">
-                                <div class="creat_account d-flex align-items-center">
-                                    <input type="checkbox" id="f-option" name="selector">
-                                    <label for="f-option">Remember me</label>
-                                </div>
-                                <button type="submit" value="submit" class="btn_3">
+                                <button type="button" id="btnLogin" class="btn_3">
                                     log in
                                 </button>
                                 <a class="lost_pass" href="#">forget password?</a>
@@ -65,3 +61,78 @@
         </div>
     </div>
 </section>
+<div class="modal" id="mdReg" role="dialog" aria-hidden="true" style="top:150px">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="card">
+                <div class="card-header"><strong>Register</strong><div class="fa fa-times closedMDReg" style="float:right"></div></div>
+                <div class="card-body card-block" style="overflow:scroll">
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="txtLgEmail" class=" form-control-label">Email</label></div>
+                        <div class="col-12 col-md-9">
+                            <input type="email" id="txtLgEmail" placeholder="Example:estore@gmail.com" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="txtPassword" class=" form-control-label">Password</label></div>
+                        <div class="col-12 col-md-9">
+                            <input type="password" id="txtPassword" placeholder="Password" class="form-control">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary closedMDReg">Close</button>
+                        <button type="button" class="btn btn-primary" id="btnSubmitReg">Register</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var obj = {};
+    $(document).on('click', '#btnLogin', function () {
+        var user = $('#txtuserName').val(),
+            pwd = $('#password').val();
+        $.ajax({
+            url: '/ClientLogin/ClientLogin',
+            type: 'get',
+            data: { username: user, password: pwd },
+            success: function (res) {
+                if (res == 'True') {
+                    alert('Login Success');
+                    location.href = '/';
+                } else {
+                    alert('Login failed');
+                }
+            }
+        })
+    })
+
+    $('#btnReg').on('click', function () {
+        $('#mdReg').show();
+        return false;
+    })
+
+    $('.closedMDReg').on('click', function () {
+        $('#mdReg').hide();
+    })
+
+    $('#btnSubmitReg').on('click', function () {
+        var usr = $('#txtLgEmail').val(),
+            pwd = $('#txtPassword').val();
+        $.ajax({
+            url: '/ClientLogin/Register',
+            type: 'get',
+            data: { username: usr, password: pwd },
+            success: function (res) {
+                if (res == 'True') {
+                    alert('Success');
+                    $('#mdReg').hide();
+                } else {
+                    alert('Exist Username');
+                }
+            }
+        })
+    })
+
+</script>

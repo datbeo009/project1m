@@ -1,4 +1,5 @@
 ﻿using DataAccess.DAL;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +41,16 @@ namespace Test.Areas.Admin.Controllers
             }
             return Json(Url.Action("Index"));
         }
+        [HttpGet]
+        public string CheckLogInfo()
+        {
+            var session = (AdminLogin)Session["AdminSession"];
+            return JsonConvert.SerializeObject(session);
+        }
 
-
+        public void LogOut()
+        {
+            Session["AdminSession"] = null;
+        }
     }
 }

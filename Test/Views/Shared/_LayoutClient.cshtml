@@ -129,20 +129,13 @@
                             </div>
                             <div class="col-xl-5 col-lg-3 col-md-3 col-sm-3 fix-card">
                                 <ul class="header-right f-right d-none d-lg-block d-flex justify-content-between">
-                                    @*<li class="d-none d-xl-block">
-                                        <div class="form-box f-right ">
-                                            <input type="text" name="Search" placeholder="Search products">
-                                            <div class="search-icon">
-                                                <i class="fas fa-search special-tag"></i>
-                                            </div>
-                                        </div>
-                                    </li>*@
                                     <li>
                                         <div class="shopping-card" data-content="0" id="spCart">
                                             <a href="/ShoppingCart/Index"><i class="fa fa-shopping-cart" style="font-size: x-large;"></i></a>
                                         </div>
                                     </li>
-                                    <li class="d-lg-block"> <a href="/ClientLogin/Index" class="btn header-btn">Sign in</a></li>
+                                    <li id="dvLogin" style="display:none"> <a href="/ClientLogin/Index" class="btn header-btn">Sign in</a></li>
+                                    <li id="dvUser" style="display:none"><p><span id="userName"></span> <a href="#" class="btn header-btn" id="lgOut">Log out</a></p> </li>
                                 </ul>
                             </div>
                             <!-- Mobile Menu -->
@@ -261,9 +254,40 @@
             })
         }
 
+        function checkLogin() {
+            $.ajax({
+                url: '/ClientLogin/CheckLogInfo',
+                type: 'get',
+                success: function (res) {
+                    var obj = JSON.parse(res);
+                    if (obj == null) {
+                        $('#dvLogin').show();
+                        $('#dvUser').hide();
+                    } else {
+                        $('#dvLogin').hide();
+                        $('#dvUser').show();
+                        $('#userName').html(obj.UserName);
+                    }
+                }
+            })
+        }
+
+        $('#lgOut').on('click', function () {
+            $.ajax({
+                url: '/ClientLogin/LogOut',
+                type: 'get',
+                success: function () {
+                    $('#dvLogin').show();
+                    $('#dvUser').hide();
+                }
+            })
+            return false;
+        })
+
         loadCartCount();
         LoadCategory();
-
+        checkLogin();
+        
 
     </script>
 

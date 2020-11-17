@@ -121,16 +121,11 @@
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             @*<img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">*@
+                            <h5 id="currentUser">Duy</h5>
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
-
-                            <a class="nav-link" href="#"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
-
-                            <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
-
-                            <a class="nav-link" href="#"><i class="fa fa-power -off"></i>Logout</a>
+                            <a class="nav-link" href="#" id="logOut"><i class="fa fa-power -off"></i>Logout</a>
                         </div>
                     </div>
 
@@ -155,9 +150,9 @@
                     <div class="col-sm-6">
                         Copyright &copy; 2018 MyMuscles
                     </div>
-                    <div class="col-sm-6 text-right">
+                    @*<div class="col-sm-6 text-right">
                         Designed by <a href="https://colorlib.com">Colorlib</a>
-                    </div>
+                    </div>*@
                 </div>
             </div>
         </footer>
@@ -188,7 +183,30 @@
     <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
     <script src="~/Areas/Admin/assets/js/init/fullcalendar-init.js"></script>
+    <script>
+        function getLoginInfo() {
+            $.ajax({
+                url: '/Admin/Login/CheckLogInfo',
+                type: 'get',
+                success: function (res) {
+                    var obj = JSON.parse(res);
+                    $('#currentUser').html(obj.UserName);
+                }
+            })
+        }
 
+        $('#logOut').on('click', function () {
+            $.ajax({
+                url: '/Admin/Login/LogOut',
+                type: 'get',
+                success: function () {
+                    location.reload();
+                }
+            })
+            return false;
+        })
+        getLoginInfo();
+    </script>
     <!--Local Stuff-->
 
 </body>

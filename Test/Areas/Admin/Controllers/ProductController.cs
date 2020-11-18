@@ -29,6 +29,7 @@ namespace Test.Areas.Admin.Controllers
             return Json(proBll.Gets(),JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
+        [ValidateInput(false)]
         public bool CreateOrUpdate(ProductModel model)
         {
             Product entity = new Product();

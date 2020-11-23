@@ -182,7 +182,9 @@
         currentFilterLs = cateId != 0 ? _glbProduct.filter(c => c.CategoryID == cateId) : _glbProduct;
         fltLs.forEach((e, i) => {
             if (i >= 10) return;
-            lsProduct.append("<tr><th scope ='row'>" + e.Idx + "</th ><td>" + e.ProductName + "</td><td>" + e.CategoryName + "</td><td><img src='" + e.ListImage.split(",")[0] + "' style='max-width:150px;max-height:150px'></td><td>" + e.Price + "</td><td ><a data-id='" + e.ProductID + "' class='btnEdit'><i class='fa fa-wrench'></i></a> <a class='btnDel' data-id='" + e.ProductID + "'><i class='fa fa-times-circle' ></i></a></td></tr >");
+
+            var image = e.ListImage != null ? e.ListImage.split(",")[0] : ""
+            lsProduct.append("<tr><th scope ='row'>" + e.Idx + "</th ><td>" + e.ProductName + "</td><td>" + e.CategoryName + "</td><td><img src='" + image + "' style='max-width:150px;max-height:150px'></td><td>" + e.Price + "</td><td ><a data-id='" + e.ProductID + "' class='btnEdit'><i class='fa fa-wrench'></i></a> <a class='btnDel' data-id='" + e.ProductID + "'><i class='fa fa-times-circle' ></i></a></td></tr >");
         })
     }
 
